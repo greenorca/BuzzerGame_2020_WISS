@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -26,9 +27,6 @@
                 <RowConstraints maxHeight="674.0" minHeight="10.0" prefHeight="670.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <AnchorPane />
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" />
                   <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
                         <Label id="lblS1" alignment="CENTER" layoutX="208.0" layoutY="73.0" text="Spieler 1" textAlignment="CENTER" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="100.0" />
@@ -50,21 +48,27 @@
                </children>
             </GridPane>
          </children>
+         <BorderPane.margin>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </BorderPane.margin>
       </AnchorPane>
    </center>
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="232.0" layoutY="147.0" text="Drückt auf den Buzzer um euch einzuloggen" textAlignment="CENTER" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="150.0">
+            <Label alignment="CENTER" layoutX="232.0" layoutY="147.0" text="Drückt auf den Buzzer um euch einzuloggen" textAlignment="CENTER" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="150.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
             <ImageView fitHeight="171.0" fitWidth="400.0" layoutX="1552.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="120.0" AnchorPane.topAnchor="-25.0">
                <image>
-                  <Image url="@../res/LogoWISS.jpg" />
+                  <Image url="@../../resources/LogoWISS.jpg" />
                </image>
             </ImageView>
          </children>
+         <BorderPane.margin>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </BorderPane.margin>
       </AnchorPane>
    </top>
    <bottom>
@@ -75,6 +79,9 @@
                   <Font size="36.0" />
                </font></Button>
          </children>
+         <BorderPane.margin>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </BorderPane.margin>
       </AnchorPane>
    </bottom>
 </BorderPane>

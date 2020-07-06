@@ -45,7 +45,6 @@ public class GameController extends Application {
 	private double screenHeight = screenSize.getHeight();
 	private double screenWidth = screenSize.getWidth();
 
-	static GameController gamecontroller;
 	private StartupViewController startupController;
 	private int rundenCounter;
 	private List<Frage> eingeleseneFragen;
@@ -61,6 +60,7 @@ public class GameController extends Application {
 
 	public static void main(String[] args) {
 
+<<<<<<< HEAD
 		gamecontroller = new GameController();
 
 		List<Frage> alleFragen = EinAuslesenFragen.einlesenFragen("/home/pi/Desktop/fragenBuzzerGame_20180925.csv");
@@ -68,11 +68,15 @@ public class GameController extends Application {
 		System.out.println("Size eingelesene Fragen: " + gamecontroller.eingeleseneFragen.size());
 		
 
+=======
+>>>>>>> 5ab15cca4ca157236e789c3aac164019e3236607
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		
+		
 		try {
 			myStage = primaryStage;
 			myStage.setTitle("Buzzer Game");
@@ -112,7 +116,7 @@ public class GameController extends Application {
 
 
 	public void showLobbyView() {
-		gamecontroller.spielerliste.clear();
+		spielerliste.clear();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LobbyView.fxml"));
 		try {
 			Scene lobbyScene = new Scene(loader.load(), screenWidth, screenHeight);
@@ -134,7 +138,7 @@ public class GameController extends Application {
 					}
 									
 				}
-				gamecontroller.spielerliste.add(s);
+				spielerliste.add(s);
 				buzzer1.getAnswer().removeListener(this);
 				System.out.println("Spieler1 erstellt");
 				lobbyController.setReady1();
@@ -156,7 +160,7 @@ public class GameController extends Application {
 					}
 									
 				}
-				gamecontroller.spielerliste.add(s);
+				spielerliste.add(s);
 					buzzer2.getAnswer().removeListener(this);
 					System.out.println("Spieler2 erstellt");
 					lobbyController.setReady2();
@@ -176,18 +180,16 @@ public class GameController extends Application {
 									
 				}
 				
-					gamecontroller.spielerliste.add(s);
+					spielerliste.add(s);
 					buzzer3.getAnswer().removeListener(this);
 					System.out.println("Spieler3 erstellt");
 					lobbyController.setReady3();
 			}			
 		});
 			
-			Collections.shuffle(gamecontroller.eingeleseneFragen);
-			System.out.println("Size eingelesene Fragen: " + gamecontroller.eingeleseneFragen.size());
-			
-			gamecontroller.tenQuestions = gamecontroller.eingeleseneFragen.subList(0, 10);
-			spielrunde = new Spielrunde(gamecontroller.tenQuestions);
+			Collections.shuffle(eingeleseneFragen);
+			System.out.println("Size eingelesene Fragen: " + eingeleseneFragen.size());
+			spielrunde = new Spielrunde(eingeleseneFragen.subList(0, 10));
 			System.out.println("Spielrunde erstellt");
 			
 			myStage.setScene(lobbyScene);
@@ -219,9 +221,9 @@ public class GameController extends Application {
 			
 			Spieler s = new Spieler(playername, buzzerSet1Controller);
 
-			if(gamecontroller.spielerliste.size() == 0) {
+			if(spielerliste.size() == 0) {
 				System.out.println("Erster Spieler hinzugefügt");
-				gamecontroller.spielerliste.add(s);
+				spielerliste.add(s);
 				stage.setScene(scene);
 				stage.setY(yPosition);
 				stage.setX(xPosition);
@@ -229,14 +231,14 @@ public class GameController extends Application {
 			}
 			else {
 				boolean enthalten = false;
-				for (int i = 0; i < gamecontroller.spielerliste.size(); i++) {					
-					if(gamecontroller.spielerliste.get(i).getName().equals(s.getName())) {
+				for (int i = 0; i < spielerliste.size(); i++) {					
+					if(spielerliste.get(i).getName().equals(s.getName())) {
 						System.out.println("Enthalten");
 						enthalten = true;						
 					}					
 				}	
 				if(enthalten == false) {
-					gamecontroller.spielerliste.add(s);
+					spielerliste.add(s);
 					System.out.println(s.getName() + " hinzugefügt");
 					stage.setScene(scene);
 					stage.setY(yPosition);
@@ -260,7 +262,7 @@ public class GameController extends Application {
 			questionScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
 
 			QuestionViewController questionController = loader.getController();
-			Fragerunde fragerunde = new Fragerunde(question, gamecontroller.spielerliste);
+			Fragerunde fragerunde = new Fragerunde(question, spielerliste);
 			questionController.setMainController(this);
 
 			questionController.setQuestion(fragerunde.getFrage());
@@ -323,14 +325,14 @@ public class GameController extends Application {
 			ScoreViewController scoreController = loader.getController();
 			scoreController.setMainController(this);
 
-			Collections.sort(gamecontroller.spielerliste, new Comparator<Spieler>() {
+			Collections.sort(spielerliste, new Comparator<Spieler>() {
 
 				@Override
 				public int compare(Spieler arg0, Spieler arg1) {
 
 					return arg1.getPunktestand().get() - arg0.getPunktestand().get();
 				}});
-			scoreController.setSpielerInformation(gamecontroller.spielerliste);
+			scoreController.setSpielerInformation(spielerliste);
 
 
 			scoreController.getRestzeit().addListener(showNextQuestionListener);
@@ -353,14 +355,14 @@ public class GameController extends Application {
 			EndViewController endController = loader.getController();
 			endController.setMainController(this);
 
-			Collections.sort(gamecontroller.spielerliste, new Comparator<Spieler>() {
+			Collections.sort(spielerliste, new Comparator<Spieler>() {
 
 				@Override
 				public int compare(Spieler arg0, Spieler arg1) {
 
 					return arg1.getPunktestand().get() - arg0.getPunktestand().get();
 				}});
-			endController.setSpielerInformation(gamecontroller.spielerliste);
+			endController.setSpielerInformation(spielerliste);
 
 			//XD added Listener
 			//endController.getRestzeit().addListener(showLobbySceneListener);
@@ -417,7 +419,7 @@ public class GameController extends Application {
 	}
 
 	public void endNotifyDone() {
-		System.out.println("Spielerliste grösse: "+ gamecontroller.spielerliste.size());
+		System.out.println("Spielerliste grösse: "+ spielerliste.size());
 		showLobbyView();
 		
 	}
@@ -471,10 +473,5 @@ public class GameController extends Application {
 		return spielerliste;
 	}
 
-	public static GameController getGamecontroller() {
-		return gamecontroller;
-	}
-	
-	
 
 }
