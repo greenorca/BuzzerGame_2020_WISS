@@ -12,9 +12,12 @@ import java.util.TimerTask;
 import application.Antwort;
 import application.Frage;
 import application.GameController;
+import application.Spieler;
 import javafx.application.Platform;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -23,6 +26,7 @@ import javafx.scene.control.Label;
 public class QuestionViewController implements Initializable {
 
 	GameController gameController;
+	private Frage frage;
 	@FXML
 	private Label lblRestzeit;
 	@FXML
@@ -38,7 +42,10 @@ public class QuestionViewController implements Initializable {
 	private int btnClickCounter = 0;
 	private static int TIMEOUT = 10;
 	private Timer timer;
-	long tStart;
+	long timeStart;
+	int maxZeit;
+	int antworten = 0;
+	
 	
 	public IntegerProperty getRestzeit() {
 		if (restzeit == null)
@@ -50,50 +57,66 @@ public class QuestionViewController implements Initializable {
 		this.gameController = mainController;
 	}
 	
-	
-	public void setQuestion(Frage f) {
-		//lblFrage = new Label();		
-		lblFrage.setText(f.getFrage());
-		System.out.println(f.getFrage());
+	public void initFrage(Frage frage, List<Spieler> spielerListe, int maxZeit) {
+		this.frage = frage;
+		lblFrage.setText(frage.getFrage());
+		setAnswers(frage.getAntworten());
+		this.maxZeit = maxZeit;
+		initPlayers(spielerListe);
+		
+		
+		getRestzeit().setValue(TIMEOUT);		
+		timer = new Timer();
+		timer.scheduleAtFixedRate(tTask, 0, 1000); //aktiviere zyklische Wiederholung
+		
 	}
 	
-	public void setAnswer(List<Antwort> antworten) {		
-		
+	private void initPlayers(List<Spieler> spielerListe) {
+		spielerListe.forEach(spieler -> {		
+			spieler.reset();
+			spieler.getAntwortNr().addListener(new ChangeListener<Number>() {
+
+				@Override
+				public void changed(ObservableValue<? extends Number> arg0, Number alt, Number neu) {	
+					
+					if((int)neu == frage.korrekteAntwortInt()) {
+						long pressedTime = System.currentTimeMillis();
+						int punkte = (maxZeit*1000 - (int)(pressedTime - timeStart))/100;
+
+						spieler.addPunkte(punkte);
+						spieler.setRundenpunkte(punkte);
+
+						System.out.println("'Fragerunde: '" + spieler.getName() + " hat " + punkte + " Punkte");
+						
+					}
+					spieler.getAntwortNr().removeListener(this);
+					antworten++;
+					if (antworten >= spielerListe.size()) {
+						restzeit.set(0);
+					}
+				}
+
+			});
+			System.out.println("'Fragerunde: '" + spieler.getName().toString() + " Listener added");
+			spieler.setRundenpunkte(0);
+		});
+	}
+	
+	private void setAnswers(List<Antwort> antworten) {		
+		//TODO: proper shuffling
 		lblAntwort1.setText(antworten.get(0).getAntwort());
 		lblAntwort2.setText(antworten.get(1).getAntwort());
 		lblAntwort3.setText(antworten.get(2).getAntwort());
 		
 	}
 	
-	//setQuestion - Methode
-	//public void setQuestion() {}
 	
-	/**
-	 * Zugriff auf Spieler oder Buzzer?
-	 */
-	
-
-	/**
-	 * wird der Button zum dritten mal gedrückt, wird die Restzeit auf 0 gesetzt
-	 * @param event
-	 */
-	/*@FXML
-	public void btnPressed(ActionEvent event) {
-		btnClickCounter++;
-		if (btnClickCounter==10) {
-			getRestzeit().set(0);
-		}
-	}*/
-
 	/**
 	 * initialize Scene and start countdown timer
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		getRestzeit().setValue(TIMEOUT);
-		tStart = new Date().getTime(); //setzte Startzeit		
-		timer = new Timer();
-		timer.scheduleAtFixedRate(tTask, 0, 1000); //aktiviere zyklische Wiederholung
+
 	}
 	
 	/**
@@ -102,10 +125,10 @@ public class QuestionViewController implements Initializable {
 	TimerTask tTask = new TimerTask() {
 		@Override
 		public void run() {
-			long deltaT = (new Date().getTime()-tStart)/1000;
+			long deltaT = (new Date().getTime()-timeStart)/1000;
 			getRestzeit().setValue((int)TIMEOUT-deltaT);
 			Platform.runLater(updateRestzeitLabel); // 
-			if (getRestzeit().intValue()==0) {
+			if (getRestzeit().intValue()<=0) {
 				timer.cancel();
 			}
 		}

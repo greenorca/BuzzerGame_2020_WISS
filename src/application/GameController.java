@@ -248,19 +248,10 @@ public class GameController extends Application {
 		try {
 
 			Scene questionScene = new Scene(loader.load());//, screenWidth, screenHeight - 200);
-			//questionScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
 
 			QuestionViewController questionController = loader.getController();
-			Fragerunde fragerunde = new Fragerunde(question, spielerliste, MAX_ZEIT);
-			questionController.setMainController(this);
-
-			questionController.setQuestion(fragerunde.getFrage());
-
+			questionController.initFrage(question, spielerliste, MAX_ZEIT);
 			
-			List<Antwort> shuffledAntworten = fragerunde.getFrage().getAntworten();
-			Collections.shuffle(shuffledAntworten);			
-			questionController.setAnswer(shuffledAntworten);			
-
 			questionController.getRestzeit().addListener(showAnswerSceneListener);
 
 			myStage.setScene(questionScene);
