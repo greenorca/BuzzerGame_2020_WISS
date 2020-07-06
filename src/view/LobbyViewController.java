@@ -51,7 +51,7 @@ public class LobbyViewController {
 	
 	@FXML
 	public void btnQuestionPressed(ActionEvent event) {	
-		if(gameController.getGamecontroller().getSpielerliste().size() > 1) {
+		if(gameController.getSpielerliste().size() > 1) {
 			gameController.lobbyNotifyDone();		
 		}
 	}
