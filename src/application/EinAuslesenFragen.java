@@ -19,18 +19,7 @@ import java.util.List;
  */
 public class EinAuslesenFragen {	
 
-<<<<<<< HEAD
-	String file;
-
-	public EinAuslesenFragen(String file) {
-		this.file = file;
-	}
-
 	public static List<Frage> einlesenFragen(String fileCSV) {
-=======
-	public List<Frage> einlesenFragen(String fileCSV) {
->>>>>>> 5ab15cca4ca157236e789c3aac164019e3236607
-
 		List<Frage> fragen = new ArrayList<Frage>();
 
 		String line = "";

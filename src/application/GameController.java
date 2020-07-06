@@ -59,23 +59,12 @@ public class GameController extends Application {
 
 
 	public static void main(String[] args) {
-
-<<<<<<< HEAD
-		gamecontroller = new GameController();
-
-		List<Frage> alleFragen = EinAuslesenFragen.einlesenFragen("/home/pi/Desktop/fragenBuzzerGame_20180925.csv");
-		gamecontroller.eingeleseneFragen = alleFragen;
-		System.out.println("Size eingelesene Fragen: " + gamecontroller.eingeleseneFragen.size());
-		
-
-=======
->>>>>>> 5ab15cca4ca157236e789c3aac164019e3236607
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		eingeleseneFragen = EinAuslesenFragen.einlesenFragen("/home/pi/Desktop/fragenBuzzerGame_290620.csv");
 		
 		try {
 			myStage = primaryStage;
