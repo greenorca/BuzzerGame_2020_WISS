@@ -127,8 +127,7 @@ public class QuestionViewController implements Initializable {
 	TimerTask tTask = new TimerTask() {
 		@Override
 		public void run() {
-			long deltaT = (new Date().getTime()-timeStart)/1000;
-			getRestzeit().setValue((int)TIMEOUT-deltaT);
+			getRestzeit().setValue((int)( System.currentTimeMillis()-timeStart)/1000);
 			Platform.runLater(updateRestzeitLabel); // 
 			if (getRestzeit().intValue()<=0) {
 				timer.cancel();

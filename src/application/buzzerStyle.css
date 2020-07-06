@@ -12,6 +12,13 @@
 	-fx-font-size: 30pt;
 }
 
+#zwischenstand .label{
+	-fx-padding: 10pt;
+	-fx-font-weight: bold;
+	-fx-font-size: 20pt;
+}
+
+
 #lblZeit {
 	-fx-text-fill: #212529;
 	-fx-border-color: none;

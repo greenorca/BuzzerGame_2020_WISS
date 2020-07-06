@@ -30,7 +30,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import view.AnswerViewController;
 import view.FXBuzzerController;
 import view.EndViewController;
 import view.LobbyViewController;
@@ -228,44 +227,17 @@ public class GameController extends Application {
 		}
 	}
 
-	private void showAnswerScene(Frage question) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AnswerView.fxml"));
-		try {			
-			Scene answerScene = new Scene(loader.load(), screenWidth, screenHeight);
-			answerScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
-
-			AnswerViewController answerController = loader.getController();
-			answerController.setMainController(this);
-			answerController.setFrage(question);
-			answerController.setAnswer(question);
-
-
-
-			//answerController.setSpielerInformation(gamecontroller.spielerliste);
-			answerController.getRestzeit().addListener(showScoreSceneListener);
-			myStage.setScene(answerScene);
-			myStage.setFullScreen(true);
-			myStage.show();
-
-			//(getRundenCounter() + 1);
-
-		} catch(Exception e) {
-
-			e.printStackTrace();
-			Platform.exit();
-		}
-	}
 
 	//XD added showScoreScene()
-	public void showScoreScene() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/scoreView2.fxml"));
+	public void showAnswerScene() {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ScoreView2.fxml"));
 		try {
 			Scene scoreScene = new Scene(loader.load(), screenWidth, screenHeight);
 			scoreScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
 			ScoreViewController scoreController = loader.getController();
 			scoreController.setMainController(this);
 
-			scoreController.setSpielerInformation(alleSpieler);
+			scoreController.setInformation(aktuelleFrage, alleSpieler);
 			scoreController.getRestzeit().addListener(showNextQuestionListener);
 
 			myStage.setScene(scoreScene);
@@ -299,19 +271,6 @@ public class GameController extends Application {
 	}
 
 
-
-
-
-	public void answerNotifyDone() {
-		if(rundenCounter <=4 ) {
-			showScoreScene();
-		}
-		else {
-			rundenCounter = 0;
-			showEndScene();
-		}
-	}
-
 	public void lobbyNotifyDone() {
 		rundenCounter++;
 		aktuelleFrage = spielrunde.naechsteFrage();
@@ -336,8 +295,7 @@ public class GameController extends Application {
 
 	private ChangeListener<Number> showAnswerSceneListener = (o, a, newValue) -> {
 		if (newValue.intValue() <= 0) {			
-			Platform.runLater(() -> showAnswerScene(aktuelleFrage));
-
+			Platform.runLater(() -> showAnswerScene());
 		}
 	};
 
@@ -347,12 +305,7 @@ public class GameController extends Application {
 		}
 	};
 
-	private ChangeListener<Number> showScoreSceneListener = (o, a, newValue) -> {
-		if (newValue.intValue() <= 0) {
-			Platform.runLater(() -> answerNotifyDone());
-		}
-	};
-
+	
 	public Set<Spieler> getSpielerliste() {
 		return alleSpieler;
 	}

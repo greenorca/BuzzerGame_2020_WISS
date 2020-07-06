@@ -12,6 +12,7 @@ import java.util.TimerTask;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import application.Frage;
 import application.GameController;
 import application.Spieler;
 import javafx.beans.property.IntegerProperty;
@@ -50,15 +51,19 @@ public class ScoreViewController implements Initializable{
 	Label lblS3PunkteGesamt;
 	@FXML
 	HBox hBoxS3;
+	
+	@FXML Label lblFrage;
+	@FXML Label lblAntwort;
+	
 
 	private IntegerProperty restzeit;
-	private static int TIMEOUT = 5;
+	private static int TIMEOUT = 10;
 	private Timer timer;
 	long tStart;
 
 	public IntegerProperty getRestzeit() {
 		if (restzeit == null) 
-			restzeit = new SimpleIntegerProperty();
+			restzeit = new SimpleIntegerProperty(TIMEOUT);
 		return restzeit;
 	}
 
@@ -71,15 +76,14 @@ public class ScoreViewController implements Initializable{
 		getRestzeit().setValue(TIMEOUT);
 		tStart = new Date().getTime(); //setze Startzeit
 		timer = new Timer();
-		timer.scheduleAtFixedRate(tTask, 0, 500);
+		timer.scheduleAtFixedRate(tTask, 0, 1000);
 
 	}
 
 	TimerTask tTask = new TimerTask() {
 		@Override
 		public void run() {
-			long deltaT = (new Date().getTime()-tStart)/1000;
-			getRestzeit().setValue((int)TIMEOUT-deltaT);
+			getRestzeit().set(getRestzeit().get()-1);
 			if (getRestzeit().intValue()==0) {
 				timer.cancel();
 			}
@@ -87,7 +91,10 @@ public class ScoreViewController implements Initializable{
 		}
 	};
 
-	public void setSpielerInformation(Set<Spieler> spielerSet) {
+	public void setInformation(Frage frage, Set<Spieler> spielerSet) {
+		
+		lblFrage.setText(frage.getFrage());
+		lblAntwort.setText(frage.getAntworten().get(frage.korrekteAntwortInt()-1).getAntwort());
 		
 		List<Spieler> spielerliste = spielerSet.stream().collect(Collectors.toList());
 		Collections.sort(spielerliste, new Comparator<Spieler>() {
@@ -112,15 +119,11 @@ public class ScoreViewController implements Initializable{
 		lblS2PunkteDazu.setText(String.valueOf(spielerliste.get(1).getRundenpunkte()));
 		
 		if(spielerliste.size() == 2) {
-			hBoxS3.setStyle("-fx-border-color: none");
 			lblS3Name.setText("");
 			lblS3PunkteDazu.setText("");
 			lblS3PunkteGesamt.setText("");
 			lblS3PunkteZuvor.setText("");
-		}
-		
-		
-
+		} 
 		else if(spielerliste.size() == 3) {
 			int S3punkteDavor = (spielerliste.get(2).getPunktestand().getValue()) - (spielerliste.get(2).getRundenpunkte());
 			System.out.println("Spieler 3 sollte angezeigt werden");
