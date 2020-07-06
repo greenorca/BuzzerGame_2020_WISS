@@ -50,7 +50,7 @@ public class QuestionViewController implements Initializable {
 	
 	public IntegerProperty getRestzeit() {
 		if (restzeit == null)
-			restzeit = new SimpleIntegerProperty();
+			restzeit = new SimpleIntegerProperty(TIMEOUT);
 		return restzeit;
 	}
 	
@@ -63,6 +63,7 @@ public class QuestionViewController implements Initializable {
 		lblFrage.setText(frage.getFrage());
 		setAnswers(frage.getAntworten());
 		this.maxZeit = maxZeit;
+		this.timeStart = System.currentTimeMillis();
 		initPlayers(spielerliste);
 		
 		
