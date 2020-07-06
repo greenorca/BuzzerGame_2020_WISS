@@ -7,6 +7,9 @@ import java.util.TimerTask;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+
 public class Fragerunde {
 
 	//wenn fragerunde gestartet, abonniert sich an den BuzzerPressedProperties von den Spielern
@@ -17,8 +20,10 @@ public class Fragerunde {
 	//int runde;
 	private List<Spieler> spielerListe;
 	int antwort = 0;
-	private int restZeit = 10;
+	private int maxZeit, restZeit = 10;
 	private Timer myTimer = new Timer();
+	private IntegerProperty answers;
+	
 	private TimerTask timerTask = new TimerTask() {
 
 		@Override
@@ -30,18 +35,19 @@ public class Fragerunde {
 		}		
 	};
 
-
-	//private List<Frage> ausgeleseneFragen = eaF.leseFragen("src/res/fragen.ser");	
-
-	public Fragerunde(Frage frage, List<Spieler> spielerListe) {
-		super();
+	public Fragerunde(Frage frage, List<Spieler> spielerListe, int maxZeit) {
+		answers = new SimpleIntegerProperty();
+		this.maxZeit = maxZeit;
+		restZeit = maxZeit;
 		timeStart = System.currentTimeMillis();
-		
-		//this.runde = 0;
 		this.frage = frage;
 		this.spielerListe = spielerListe;		
 		buzzerAbonnieren();
 		start();
+	}
+	
+	public IntegerProperty answers(){
+		return answers;
 	}
 
 
@@ -51,61 +57,35 @@ public class Fragerunde {
 		//
 		System.out.println("'Fragerunde: ' Anzahl Buzzer abonniert: " + spielerListe.size());
 		spielerListe.forEach(spieler -> {		
-			//spieler.setAntwortNr(new SimpleIntegerProperty());
-			//spieler.aboErneuern();
 			spieler.reset();
-			System.out.println("'Fragerunde: ' AntwortNr: " + spieler.getAntwortNr().getValue());
 			spieler.getAntwortNr().addListener(new ChangeListener<Number>() {
-
-
-
 
 				@Override
 				public void changed(ObservableValue<? extends Number> arg0, Number alt, Number neu) {	
-					long pressedTime = System.currentTimeMillis();
-					long restTime = (pressedTime - timeStart)/100;
-					int restTime2 = (int)restTime;
-
-					System.out.println("'Fragerunde: ' SpielerAntwortNr: " + neu);
-
+					
 					if((int)neu == frage.korrekteAntwortInt()) {
-						//restZeit = 10 - myTimer.getTimeInSeconds();
-						//System.out.println("Observer:Restzeit: " + restZeit);
-						//spieler.setPunktestand(spieler.getPunktestand().add((int)neu));
-						spieler.addPunkte(restTime2);
-						spieler.setRundenpunkte(restTime2);
+						long pressedTime = System.currentTimeMillis();
+						int punkte = (maxZeit*1000 - (int)(pressedTime - timeStart))/100;
 
-						System.out.println("'Fragerunde: '" + spieler.getName() + " Restzeit: " + restZeit);
-						System.out.println("'Fragerunde: '" + spieler.getName() + " hat " + spieler.getPunktestand().getValue() + " Punkte");
+						spieler.addPunkte(punkte);
+						spieler.setRundenpunkte(punkte);
+
+						System.out.println("'Fragerunde: '" + spieler.getName() + " hat " + punkte + " Punkte");
 						
 					}
-					else {
-						//spieler.setRundenpunkte(0);
-					}
-
 					spieler.getAntwortNr().removeListener(this);
-
-					//spieler.setAntwortNr(new SimpleIntegerProperty());
-					//System.out.println("'Fragerunde: '" + spieler.getName().toString() + " BUtton " + spieler.antwortNr.getValue() + " gedrückt");
-
-
-
+					answers().set(answers.get()+1);
 				}
 
 			});
 			System.out.println("'Fragerunde: '" + spieler.getName().toString() + " Listener added");
-			//spieler.setAntwortNr(new SimpleIntegerProperty());
 			spieler.setRundenpunkte(0);
 		});
 	}
 
 
 	private void start() {
-
-
 		myTimer.scheduleAtFixedRate(timerTask, 0, 1000);	    
-
-
 	}
 
 
@@ -118,26 +98,4 @@ public class Fragerunde {
 		this.frage = frage;
 	}
 
-	//a) Buzzer für Spieler aktivieren
-	//b) eigentliche Frage anzeigen
-	//c) Timer starten
-	//wenn timmer abgelaufen ist, Buzzer werden deaktiviert
-	//wenn Timer abgelaufen ist, Antwort anzeigen
 }
-
-
-
-//behandelt nur genau 1 Frage
-// bekommt im Konstruktor genau 1 Frage
-
-//muss in GameController
-/*public Frage frageZufaelligAuswaehlen(List<Frage> f) {			
-		int zufallszahl = (int) (Math.random() * f.size());
-		return f.get(zufallszahl);
-	}*/
-
-
-
-
-
-

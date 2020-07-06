@@ -30,18 +30,19 @@ public class EinAuslesenFragen {
 			BufferedReader br = new BufferedReader(new FileReader(fileCSV));
 			while ((line = br.readLine()) != null) {
 				String[] bestandTeilLinie = line.split(splitBy);
-				ArrayList<Antwort> antworten = new ArrayList<Antwort>();
-				for (int i = 1; i < 4; i++) {
+				if (bestandTeilLinie.length == 5){
+					ArrayList<Antwort> antworten = new ArrayList<Antwort>();
+					for (int i = 1; i < 4; i++) {
 
-					Antwort a = new Antwort(bestandTeilLinie[i], false);					 
-					antworten.add(a);					
+						Antwort a = new Antwort(bestandTeilLinie[i], false);					 
+						antworten.add(a);					
+					}
+					int correctIndex = Integer.parseInt(bestandTeilLinie[4])-1;
+					antworten.get(correctIndex).setCorrect(true);
+
+					Frage f = new Frage(bestandTeilLinie[0], antworten);
+					fragen.add(f);
 				}
-				int correctIndex = Integer.parseInt(bestandTeilLinie[4])-1;
-				antworten.get(correctIndex).setCorrect(true);
-
-				Frage f = new Frage(bestandTeilLinie[0], antworten);
-				fragen.add(f);
-
 			}
 			System.out.println("Fragen einlesen länge: " + fragen.size());
 		} 

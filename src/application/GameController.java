@@ -56,7 +56,7 @@ public class GameController extends Application {
 	Spieler spieler3;
 	List<Spieler> spielerliste = new ArrayList<Spieler>();
 	private RaspiBuzzer buzzer1, buzzer2, buzzer3;
-
+	int MAX_ZEIT = 10;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -247,20 +247,16 @@ public class GameController extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/QuestionView.fxml"));
 		try {
 
-			Scene questionScene = new Scene(loader.load(), screenWidth, screenHeight - 200);
-			questionScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
+			Scene questionScene = new Scene(loader.load());//, screenWidth, screenHeight - 200);
+			//questionScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
 
 			QuestionViewController questionController = loader.getController();
-			Fragerunde fragerunde = new Fragerunde(question, spielerliste);
+			Fragerunde fragerunde = new Fragerunde(question, spielerliste, MAX_ZEIT);
 			questionController.setMainController(this);
 
 			questionController.setQuestion(fragerunde.getFrage());
 
-			/*for (int i = 0; i < gamecontroller.spielerliste.size(); i++) {
-				gamecontroller.spielerliste.get(i).setAntwortNr(new SimpleIntegerProperty());
-				System.out.println("AntwortNr von " + gamecontroller.spielerliste.get(i).getName().toString() + " ist " + gamecontroller.spielerliste.get(i).getAntwortNr().getValue().toString());
-			}*/
-
+			
 			List<Antwort> shuffledAntworten = fragerunde.getFrage().getAntworten();
 			Collections.shuffle(shuffledAntworten);			
 			questionController.setAnswer(shuffledAntworten);			
@@ -353,9 +349,6 @@ public class GameController extends Application {
 				}});
 			endController.setSpielerInformation(spielerliste);
 
-			//XD added Listener
-			//endController.getRestzeit().addListener(showLobbySceneListener);
-
 			
 			myStage.setScene(endScene);
 			myStage.setFullScreen(true);
@@ -378,13 +371,6 @@ public class GameController extends Application {
 			rundenCounter = 0;
 			showEndScene();
 		}
-
-		//		if(rundenCounter == 9) {			
-		//		}
-		//		rundenCounter++;
-		//		f = spielrunde.naechsteFrage();
-		//		showQuestionView(f);
-		//showBuzzerView("../view/BuzzerSet1.fxml");
 	}
 
 	public void lobbyNotifyDone() {
@@ -396,14 +382,10 @@ public class GameController extends Application {
 
 	//von Score zu nächste Frage oder Ende
 	public void scoreNotifyDone() {
-		//if(rundenCounter <= 9) {
 		System.out.println("'Gamecontroller: ' Runden gespielt: " + rundenCounter);
 		rundenCounter++;
 		f = spielrunde.naechsteFrage();
 		showQuestionView(f);
-		//} else {
-		//showEndScene();
-		//}
 
 	}
 
@@ -431,32 +413,6 @@ public class GameController extends Application {
 			Platform.runLater(() -> answerNotifyDone());
 		}
 	};
-
-	/*private ChangeListener<Number> showLobbySceneListener = (o, a, newValue) -> {
-		if (newValue.intValue() <= 0) {
-			Platform.runLater(() -> endNotifyDone());
-		}
-	};
-	* */
-
-
-
-
-	public int getRundenCounter() {
-		return rundenCounter;
-	}
-
-	public void setRundenCounter(int rundenCounter) {
-		this.rundenCounter = rundenCounter;
-	}
-
-	public Spieler getSpieler1() {
-		return spieler1;
-	}
-
-	public void setSpieler1(Spieler spieler1) {
-		this.spieler1 = spieler1;
-	}
 
 	public List<Spieler> getSpielerliste() {
 		return spielerliste;

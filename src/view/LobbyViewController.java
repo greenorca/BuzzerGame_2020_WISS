@@ -3,7 +3,7 @@ package view;
 
 
 import application.GameController;
-
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,9 +21,6 @@ public class LobbyViewController {
 	
 	@FXML
 	Button btnSpieler1, btnSpieler2, btnSpieler3;
-	
-	
-	
 	
 	GameController gameController;
 	public GameController setMainController;
@@ -56,21 +53,26 @@ public class LobbyViewController {
 		}
 	}
 	
+	
 	public void setReady1(){
-		lblS1Ready.setText("Ready");
-		lblS1Ready.setStyle("-fx-border-color: #c10a27");
-		lblS1Ready.setStyle("-fx-text-fill: black");
+		setReady(lblS1Ready);
 	}
 	
 	public void setReady2(){
-		lblS2Ready.setText("Ready");
-		lblS2Ready.setStyle("-fx-border-color: #c10a27");
-		lblS2Ready.setStyle("-fx-text-fill: black");
+		setReady(lblS2Ready);
 	}
 	
 	public void setReady3(){
-		lblS3Ready.setText("Ready");
-		lblS3Ready.setStyle("-fx-border-color: #c10a27");
-		lblS3Ready.setStyle("-fx-text-fill: black");
+		setReady(lblS3Ready);
+	}
+	
+	private void setReady(Label lbl){
+		Platform.runLater(new Runnable() {
+            @Override public void run() {
+				lbl.setText("Ready");
+				lbl.setStyle("-fx-border-color: #c10a27");
+				lbl.setStyle("-fx-text-fill: black");
+			}
+		});
 	}
 }

@@ -10,7 +10,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 
-public class Spieler implements Observer {
+public class Spieler {
 
 	String name;
 	IntegerProperty punktestand;
@@ -42,11 +42,6 @@ public class Spieler implements Observer {
 		punktestand.setValue(punktestand.getValue() + punkte);
 	}
 
-	@Override
-	public void update(Observable b, Object arg1) {		
-		System.out.println("AntwortNr: " + antwortNr);	
-	}	
-
 	public void reset() {
 		antwortNr.unbind();
 		antwortNr.setValue(0);
@@ -76,10 +71,7 @@ public class Spieler implements Observer {
 		return antwortNr;
 	}
 
-	/*public void setAntwortNr(IntegerProperty antwortNr) {
-		this.antwortNr = antwortNr;
-	}*/
-
+	
 	public void aboErneuern() {
 		antwortNr.bind(getBuzzer().getAnswer());
 	}
