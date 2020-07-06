@@ -1,11 +1,16 @@
 package view;
 
 import java.net.URL;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import application.GameController;
 import application.Spieler;
@@ -82,8 +87,17 @@ public class ScoreViewController implements Initializable{
 		}
 	};
 
-	public void setSpielerInformation(List<Spieler> spielerliste) {
+	public void setSpielerInformation(Set<Spieler> spielerSet) {
+		
+		List<Spieler> spielerliste = spielerSet.stream().collect(Collectors.toList());
+		Collections.sort(spielerliste, new Comparator<Spieler>() {
 
+			@Override
+			public int compare(Spieler arg0, Spieler arg1) {
+				return arg1.getPunktestand().get() - arg0.getPunktestand().get();
+			}
+		});
+		
 		int S1punkteDavor = (spielerliste.get(0).getPunktestand().getValue()) - (spielerliste.get(0).getRundenpunkte());
 		int S2punkteDavor = (spielerliste.get(1).getPunktestand().getValue()) - (spielerliste.get(1).getRundenpunkte());
 

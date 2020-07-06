@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -57,12 +58,12 @@ public class QuestionViewController implements Initializable {
 		this.gameController = mainController;
 	}
 	
-	public void initFrage(Frage frage, List<Spieler> spielerListe, int maxZeit) {
+	public void initFrage(Frage frage, Set<Spieler> spielerliste, int maxZeit) {
 		this.frage = frage;
 		lblFrage.setText(frage.getFrage());
 		setAnswers(frage.getAntworten());
 		this.maxZeit = maxZeit;
-		initPlayers(spielerListe);
+		initPlayers(spielerliste);
 		
 		
 		getRestzeit().setValue(TIMEOUT);		
@@ -71,8 +72,8 @@ public class QuestionViewController implements Initializable {
 		
 	}
 	
-	private void initPlayers(List<Spieler> spielerListe) {
-		spielerListe.forEach(spieler -> {		
+	private void initPlayers(Set<Spieler> spielerliste) {
+		spielerliste.forEach(spieler -> {		
 			spieler.reset();
 			spieler.getAntwortNr().addListener(new ChangeListener<Number>() {
 
@@ -91,7 +92,7 @@ public class QuestionViewController implements Initializable {
 					}
 					spieler.getAntwortNr().removeListener(this);
 					antworten++;
-					if (antworten >= spielerListe.size()) {
+					if (antworten >= spielerliste.size()) {
 						restzeit.set(0);
 					}
 				}

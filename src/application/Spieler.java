@@ -1,11 +1,5 @@
 package application;
 
-
-
-import java.util.Observable;
-import java.util.Observer;
-
-
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
@@ -18,6 +12,12 @@ public class Spieler {
 	IntegerProperty antwortNr;
 	private IBuzzer buzzer;
 
+	@Override
+	public boolean equals(Object other) {
+		if (other.getClass().equals(this.getClass()))
+			return false;
+		return ((Spieler)other).getName().equals(this.getName());
+	}
 
 	public Spieler(String name, IBuzzer buzzer) {
 		super();

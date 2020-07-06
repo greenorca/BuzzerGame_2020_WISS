@@ -1,11 +1,15 @@
 package view;
 
 import java.net.URL;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.Collectors;
 
 import application.GameController;
 import application.Spieler;
@@ -78,29 +82,37 @@ public class EndViewController implements Initializable{
 	};
 
 	
-public void setSpielerInformation(List<Spieler> spielerliste) {		
-		
-		lblS1Name.setText(spielerliste.get(0).getName().toString());
-		lblS1PunkteGesamt.setText(spielerliste.get(0).getPunktestand().getValue().toString() + " Punkte");		
-		
-		lblS2Name.setText(spielerliste.get(1).getName().toString());
-		lblS2PunkteGesamt.setText(spielerliste.get(1).getPunktestand().getValue().toString() + " Punkte");
-		
-		if(spielerliste.size() == 2) {
-			hBoxEndstand.setStyle("-fx-border-color: none");
-			lblS3Name.setText("");
-			lblS3PunkteGesamt.setText("");
-			lblPlatz3.setStyle("-fx-text-fill: white");
+public void setSpielerInformation(Set<Spieler> spielerSet) {	
+	List<Spieler> spielerliste = spielerSet.stream().collect(Collectors.toList());
+	Collections.sort(spielerliste, new Comparator<Spieler>() {
+
+		@Override
+		public int compare(Spieler arg0, Spieler arg1) {
+			return arg1.getPunktestand().get() - arg0.getPunktestand().get();
 		}
+	});
 		
-		else if(spielerliste.size() == 3) {
-			
-			System.out.println("Spieler 3 sollte angezeigt werden");
-			
-			lblS3Name.setText(spielerliste.get(2).getName().toString());
-			lblS3PunkteGesamt.setText(spielerliste.get(2).getPunktestand().getValue().toString() + " Punkte");
-			lblPlatz3.setStyle("-fx-text-fill: black");
-			
+	lblS1Name.setText(spielerliste.get(0).getName().toString());
+	lblS1PunkteGesamt.setText(spielerliste.get(0).getPunktestand().getValue().toString() + " Punkte");		
+	
+	lblS2Name.setText(spielerliste.get(1).getName().toString());
+	lblS2PunkteGesamt.setText(spielerliste.get(1).getPunktestand().getValue().toString() + " Punkte");
+	
+	if(spielerliste.size() == 2) {
+		hBoxEndstand.setStyle("-fx-border-color: none");
+		lblS3Name.setText("");
+		lblS3PunkteGesamt.setText("");
+		lblPlatz3.setStyle("-fx-text-fill: white");
+	}
+	
+	else if(spielerliste.size() == 3) {
+		
+		System.out.println("Spieler 3 sollte angezeigt werden");
+		
+		lblS3Name.setText(spielerliste.get(2).getName().toString());
+		lblS3PunkteGesamt.setText(spielerliste.get(2).getPunktestand().getValue().toString() + " Punkte");
+		lblPlatz3.setStyle("-fx-text-fill: black");
+		
 	}
 	
 	}

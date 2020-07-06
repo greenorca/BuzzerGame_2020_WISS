@@ -50,13 +50,10 @@ public class GameController extends Application {
 	private List<Frage> eingeleseneFragen;
 	private List<Frage> tenQuestions;
 	Spielrunde spielrunde;
-	Frage f;
-	private Spieler spieler1;
-	Spieler spieler2;
-	Spieler spieler3;
-	List<Spieler> spielerliste = new ArrayList<Spieler>();
+	Set<Spieler> alleSpieler = new HashSet<Spieler>();
 	private RaspiBuzzer buzzer1, buzzer2, buzzer3;
 	int MAX_ZEIT = 10;
+	private Frage aktuelleFrage;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -105,7 +102,7 @@ public class GameController extends Application {
 
 
 	public void showLobbyView() {
-		spielerliste.clear();
+		alleSpieler.clear();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LobbyView.fxml"));
 		try {
 			Scene lobbyScene = new Scene(loader.load(), screenWidth, screenHeight);
@@ -115,66 +112,42 @@ public class GameController extends Application {
 			lobbyController.setMainController(this);
 			
 			
-		buzzer1.getAnswer().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				// TODO Auto-generated method stub
-				Spieler s = new Spieler("Spieler 1", buzzer1);
-				for(int i = 0; i < spielerliste.size(); i++) {
-					if(spielerliste.get(i).getName().equals("Spieler 1")) {
-						return;
-					}
-									
-				}
-				spielerliste.add(s);
-				buzzer1.getAnswer().removeListener(this);
-				System.out.println("Spieler1 erstellt");
-				lobbyController.setReady1();
-				
-				
-			}			
-		});
-		
-		buzzer2.getAnswer().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				// TODO Auto-generated method stubbuzzer2.getAnswer().addListener(
-					Spieler s = new Spieler("Spieler 2", buzzer2);
+			buzzer1.getAnswer().addListener(new ChangeListener<Number>() {
+	
+				@Override
+				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+					Spieler s = new Spieler("Spieler 1", buzzer1);
+					alleSpieler.add(s);
+					buzzer1.getAnswer().removeListener(this);
+					System.out.println("Spieler1 erstellt");
+					lobbyController.setReady1();				
 					
-					for(int i = 0; i < spielerliste.size(); i++) {
-					if(spielerliste.get(i).getName().equals("Spieler 2")) {
-						return;
-					}
-									
-				}
-				spielerliste.add(s);
+				}			
+			});
+			
+			buzzer2.getAnswer().addListener(new ChangeListener<Number>() {
+	
+				@Override
+				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+					Spieler s = new Spieler("Spieler 2", buzzer2);
+					alleSpieler.add(s);
 					buzzer2.getAnswer().removeListener(this);
 					System.out.println("Spieler2 erstellt");
 					lobbyController.setReady2();
-			}			
-		});
-		
-		buzzer3.getAnswer().addListener(new ChangeListener<Number>() {
-
-			@Override
-			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-				// TODO Auto-generated method stubbuzzer2.getAnswer().addListener(
+				}			
+			});
+			
+			buzzer3.getAnswer().addListener(new ChangeListener<Number>() {
+	
+				@Override
+				public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 					Spieler s = new Spieler("Spieler 3", buzzer3);
-					for(int i = 0; i < spielerliste.size(); i++) {
-					if(spielerliste.get(i).getName().equals("Spieler 3")) {
-						return;
-					}
-									
-				}
-				
-					spielerliste.add(s);
+					alleSpieler.add(s);
 					buzzer3.getAnswer().removeListener(this);
 					System.out.println("Spieler3 erstellt");
 					lobbyController.setReady3();
-			}			
-		});
+				}			
+			});
 			
 			Collections.shuffle(eingeleseneFragen);
 			System.out.println("Size eingelesene Fragen: " + eingeleseneFragen.size());
@@ -210,31 +183,22 @@ public class GameController extends Application {
 			
 			Spieler s = new Spieler(playername, buzzerSet1Controller);
 
-			if(spielerliste.size() == 0) {
+			if(alleSpieler.size() == 0) {
 				System.out.println("Erster Spieler hinzugefügt");
-				spielerliste.add(s);
+				alleSpieler.add(s);
 				stage.setScene(scene);
 				stage.setY(yPosition);
 				stage.setX(xPosition);
 				stage.show();				
 			}
 			else {
-				boolean enthalten = false;
-				for (int i = 0; i < spielerliste.size(); i++) {					
-					if(spielerliste.get(i).getName().equals(s.getName())) {
-						System.out.println("Enthalten");
-						enthalten = true;						
-					}					
-				}	
-				if(enthalten == false) {
-					spielerliste.add(s);
-					System.out.println(s.getName() + " hinzugefügt");
-					stage.setScene(scene);
-					stage.setY(yPosition);
-					stage.setX(xPosition);
-					stage.show();
-				}
-			}						
+				alleSpieler.add(s);
+				System.out.println(s.getName() + " hinzugefügt");
+				stage.setScene(scene);
+				stage.setY(yPosition);
+				stage.setX(xPosition);
+				stage.show();
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -250,7 +214,7 @@ public class GameController extends Application {
 			Scene questionScene = new Scene(loader.load());//, screenWidth, screenHeight - 200);
 
 			QuestionViewController questionController = loader.getController();
-			questionController.initFrage(question, spielerliste, MAX_ZEIT);
+			questionController.initFrage(question, alleSpieler, MAX_ZEIT);
 			
 			questionController.getRestzeit().addListener(showAnswerSceneListener);
 
@@ -301,16 +265,7 @@ public class GameController extends Application {
 			ScoreViewController scoreController = loader.getController();
 			scoreController.setMainController(this);
 
-			Collections.sort(spielerliste, new Comparator<Spieler>() {
-
-				@Override
-				public int compare(Spieler arg0, Spieler arg1) {
-
-					return arg1.getPunktestand().get() - arg0.getPunktestand().get();
-				}});
-			scoreController.setSpielerInformation(spielerliste);
-
-
+			scoreController.setSpielerInformation(alleSpieler);
 			scoreController.getRestzeit().addListener(showNextQuestionListener);
 
 			myStage.setScene(scoreScene);
@@ -331,14 +286,7 @@ public class GameController extends Application {
 			EndViewController endController = loader.getController();
 			endController.setMainController(this);
 
-			Collections.sort(spielerliste, new Comparator<Spieler>() {
-
-				@Override
-				public int compare(Spieler arg0, Spieler arg1) {
-
-					return arg1.getPunktestand().get() - arg0.getPunktestand().get();
-				}});
-			endController.setSpielerInformation(spielerliste);
+			endController.setSpielerInformation(alleSpieler);
 
 			
 			myStage.setScene(endScene);
@@ -366,8 +314,8 @@ public class GameController extends Application {
 
 	public void lobbyNotifyDone() {
 		rundenCounter++;
-		f = spielrunde.naechsteFrage();
-		showQuestionView(f);
+		aktuelleFrage = spielrunde.naechsteFrage();
+		showQuestionView(aktuelleFrage);
 
 	}
 
@@ -375,20 +323,20 @@ public class GameController extends Application {
 	public void scoreNotifyDone() {
 		System.out.println("'Gamecontroller: ' Runden gespielt: " + rundenCounter);
 		rundenCounter++;
-		f = spielrunde.naechsteFrage();
-		showQuestionView(f);
+		aktuelleFrage = spielrunde.naechsteFrage();
+		showQuestionView(aktuelleFrage);
 
 	}
 
 	public void endNotifyDone() {
-		System.out.println("Spielerliste grösse: "+ spielerliste.size());
+		System.out.println("Spielerliste grösse: "+ alleSpieler.size());
 		showLobbyView();
 		
 	}
 
 	private ChangeListener<Number> showAnswerSceneListener = (o, a, newValue) -> {
 		if (newValue.intValue() <= 0) {			
-			Platform.runLater(() -> showAnswerScene(f));
+			Platform.runLater(() -> showAnswerScene(aktuelleFrage));
 
 		}
 	};
@@ -405,8 +353,8 @@ public class GameController extends Application {
 		}
 	};
 
-	public List<Spieler> getSpielerliste() {
-		return spielerliste;
+	public Set<Spieler> getSpielerliste() {
+		return alleSpieler;
 	}
 
 
