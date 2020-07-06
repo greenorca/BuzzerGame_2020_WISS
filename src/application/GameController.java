@@ -59,13 +59,12 @@ public class GameController extends Application {
 
 
 	public static void main(String[] args) {
-
 		launch(args);
 	}
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		
+		eingeleseneFragen = EinAuslesenFragen.einlesenFragen("/home/pi/Desktop/fragenBuzzerGame_290620.csv");
 		
 		try {
 			myStage = primaryStage;

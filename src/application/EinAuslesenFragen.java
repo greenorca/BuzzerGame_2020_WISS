@@ -19,8 +19,7 @@ import java.util.List;
  */
 public class EinAuslesenFragen {	
 
-	public List<Frage> einlesenFragen(String fileCSV) {
-
+	public static List<Frage> einlesenFragen(String fileCSV) {
 		List<Frage> fragen = new ArrayList<Frage>();
 
 		String line = "";
