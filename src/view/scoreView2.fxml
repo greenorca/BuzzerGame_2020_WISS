@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1080.0" prefWidth="1920.0" stylesheets="@../../eclipse-Arbeitsplaetze/LW_BuzzerNeu/BuzzerHilfeNewDesign/src/application/buzzerStyle.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ScoreViewController">
+   <center>
+      <GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../eclipse-Arbeitsplaetze/LW_BuzzerNeu/BuzzerHilfeNewDesign/src/application/buzzerStyle.css">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <HBox id="hBoxZwischenstand" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <Label id="lblZwischenstand" fx:id="lblS2Name" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" fx:id="lblS2PunkteZuvor" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" fx:id="lblS2PunkteDazu" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" fx:id="lblS2PunkteGesamt" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </GridPane.margin>
+            </HBox>
+            <HBox id="hBoxZwischenstand" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Label id="lblZwischenstand" fx:id="lblS1Name" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" fx:id="lblS1PunkteZuvor" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" fx:id="lblS1PunkteDazu" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" fx:id="lblS1PunkteGesamt" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </GridPane.margin>
+            </HBox>
+            <HBox id="hBoxZwischenstand" fx:id="hBoxS3" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                  <Label id="lblZwischenstand" fx:id="lblS3Name" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" fx:id="lblS3PunkteZuvor" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" fx:id="lblS3PunkteDazu" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" fx:id="lblS3PunkteGesamt" maxWidth="1.7976931348623157E308" text="" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </GridPane.margin>
+            </HBox>
+            <HBox id="hBoxZwischenstand" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Label id="lblZwischenstand" maxWidth="1.7976931348623157E308" text="Spieler" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" maxWidth="1.7976931348623157E308" text="Punkte davor" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" maxWidth="1.7976931348623157E308" text="Diese Runde" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label id="lblZwischenstand" maxWidth="1.7976931348623157E308" text="Gesamt" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets left="15.0" right="15.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <GridPane.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </GridPane.margin>
+            </HBox>
+         </children>
+      </GridPane>
+   </center>
+   <top>
+      <Label alignment="CENTER" text="Zwischenstand" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+</BorderPane>
