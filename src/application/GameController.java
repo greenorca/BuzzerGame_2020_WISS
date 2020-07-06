@@ -10,14 +10,7 @@ import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 import com.pi4j.io.gpio.event.GpioPinDigitalStateChangeEvent;
 import com.pi4j.io.gpio.event.GpioPinListenerDigital;
-import java.util.ArrayList;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 
-
-
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.io.IOException;
 import java.util.*;
 
@@ -40,14 +33,12 @@ import view.StartupViewController;
 public class GameController extends Application {
 
 	Stage myStage = null;
-	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	private double screenHeight = screenSize.getHeight();
-	private double screenWidth = screenSize.getWidth();
+	private double screenHeight, screenWidth;
 
 	private StartupViewController startupController;
 	private int rundenCounter;
 	private List<Frage> eingeleseneFragen;
-	private List<Frage> tenQuestions;
+
 	Spielrunde spielrunde;
 	Set<Spieler> alleSpieler = new HashSet<Spieler>();
 	private RaspiBuzzer buzzer1, buzzer2, buzzer3;
@@ -61,7 +52,8 @@ public class GameController extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		eingeleseneFragen = EinAuslesenFragen.einlesenFragen("/home/pi/Desktop/fragenBuzzerGame_290620.csv");
-		
+		screenWidth = primaryStage.getMaxWidth();
+		screenHeight = primaryStage.getMaxHeight();
 		try {
 			myStage = primaryStage;
 			myStage.setTitle("Buzzer Game");
@@ -210,7 +202,7 @@ public class GameController extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/QuestionView.fxml"));
 		try {
 
-			Scene questionScene = new Scene(loader.load());//, screenWidth, screenHeight - 200);
+			Scene questionScene = new Scene(loader.load(), screenWidth, screenHeight);
 
 			QuestionViewController questionController = loader.getController();
 			questionController.initFrage(question, alleSpieler, MAX_ZEIT);
@@ -294,6 +286,7 @@ public class GameController extends Application {
 	private ChangeListener<Number> showAnswerSceneListener = (o, a, newValue) -> {
 		if (newValue.intValue() <= 0) {	
 			System.out.println("Switching to AnswerView");		
+			o.removeListener(this.showAnswerSceneListener);
 			Platform.runLater(() -> showAnswerScene());
 		}
 	};
@@ -301,6 +294,7 @@ public class GameController extends Application {
 	private ChangeListener<Number> showNextQuestionListener = (o, a, newValue) -> {
 		if (newValue.intValue() <= 0) {
 			System.out.println("Switching to NextQuestionView");
+			o.removeListener(this.showNextQuestionListener);
 			Platform.runLater(() -> scoreNotifyDone());
 		}
 	};
