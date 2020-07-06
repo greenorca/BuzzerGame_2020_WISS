@@ -24,7 +24,6 @@ import javafx.scene.layout.HBox;
 
 public class ScoreViewController implements Initializable{
 
-	GameController gameController;
 	@FXML
 	Label lblS1Name;
 	@FXML
@@ -57,7 +56,7 @@ public class ScoreViewController implements Initializable{
 	
 
 	private IntegerProperty restzeit;
-	private static int TIMEOUT = 10;
+	private static int TIMEOUT = 15;
 	private Timer timer;
 	long tStart;
 
@@ -67,16 +66,12 @@ public class ScoreViewController implements Initializable{
 		return restzeit;
 	}
 
-	public void setMainController(GameController mainController) {
-		this.gameController = mainController;
-	}
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		getRestzeit().setValue(TIMEOUT);
 		tStart = new Date().getTime(); //setze Startzeit
 		timer = new Timer();
-		timer.scheduleAtFixedRate(tTask, 0, 1000);
+		timer.scheduleAtFixedRate(tTask, 100, 1000);
 
 	}
 
@@ -108,12 +103,12 @@ public class ScoreViewController implements Initializable{
 		int S1punkteDavor = (spielerliste.get(0).getPunktestand().getValue()) - (spielerliste.get(0).getRundenpunkte());
 		int S2punkteDavor = (spielerliste.get(1).getPunktestand().getValue()) - (spielerliste.get(1).getRundenpunkte());
 
-		lblS1PunkteZuvor.setText(String.valueOf(S1punkteDavor));
+		//lblS1PunkteZuvor.setText(String.valueOf(S1punkteDavor));
 		lblS1Name.setText(spielerliste.get(0).getName().toString());
 		lblS1PunkteGesamt.setText(spielerliste.get(0).getPunktestand().getValue().toString());
 		lblS1PunkteDazu.setText(String.valueOf(spielerliste.get(0).getRundenpunkte()));
 
-		lblS2PunkteZuvor.setText(String.valueOf(S2punkteDavor));
+		//lblS2PunkteZuvor.setText(String.valueOf(S2punkteDavor));
 		lblS2Name.setText(spielerliste.get(1).getName().toString());
 		lblS2PunkteGesamt.setText(spielerliste.get(1).getPunktestand().getValue().toString());
 		lblS2PunkteDazu.setText(String.valueOf(spielerliste.get(1).getRundenpunkte()));
@@ -122,12 +117,12 @@ public class ScoreViewController implements Initializable{
 			lblS3Name.setText("");
 			lblS3PunkteDazu.setText("");
 			lblS3PunkteGesamt.setText("");
-			lblS3PunkteZuvor.setText("");
+			//lblS3PunkteZuvor.setText("");
 		} 
 		else if(spielerliste.size() == 3) {
 			int S3punkteDavor = (spielerliste.get(2).getPunktestand().getValue()) - (spielerliste.get(2).getRundenpunkte());
 			System.out.println("Spieler 3 sollte angezeigt werden");
-			lblS3PunkteZuvor.setText(String.valueOf(S3punkteDavor));
+			//lblS3PunkteZuvor.setText(String.valueOf(S3punkteDavor));
 			lblS3Name.setText(spielerliste.get(2).getName().toString());
 			lblS3PunkteGesamt.setText(spielerliste.get(2).getPunktestand().getValue().toString());
 			lblS3PunkteDazu.setText(String.valueOf(spielerliste.get(2).getRundenpunkte()));

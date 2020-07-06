@@ -235,8 +235,6 @@ public class GameController extends Application {
 			Scene scoreScene = new Scene(loader.load(), screenWidth, screenHeight);
 			scoreScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
 			ScoreViewController scoreController = loader.getController();
-			scoreController.setMainController(this);
-
 			scoreController.setInformation(aktuelleFrage, alleSpieler);
 			scoreController.getRestzeit().addListener(showNextQuestionListener);
 
@@ -294,13 +292,15 @@ public class GameController extends Application {
 	}
 
 	private ChangeListener<Number> showAnswerSceneListener = (o, a, newValue) -> {
-		if (newValue.intValue() <= 0) {			
+		if (newValue.intValue() <= 0) {	
+			System.out.println("Switching to AnswerView");		
 			Platform.runLater(() -> showAnswerScene());
 		}
 	};
 
 	private ChangeListener<Number> showNextQuestionListener = (o, a, newValue) -> {
 		if (newValue.intValue() <= 0) {
+			System.out.println("Switching to NextQuestionView");
 			Platform.runLater(() -> scoreNotifyDone());
 		}
 	};

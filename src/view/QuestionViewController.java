@@ -69,7 +69,7 @@ public class QuestionViewController implements Initializable {
 		
 		getRestzeit().setValue(TIMEOUT);		
 		timer = new Timer();
-		timer.scheduleAtFixedRate(tTask, 0, 1000); //aktiviere zyklische Wiederholung
+		timer.scheduleAtFixedRate(tTask, 100, 1000); //aktiviere zyklische Wiederholung
 		
 	}
 	
@@ -127,7 +127,7 @@ public class QuestionViewController implements Initializable {
 	TimerTask tTask = new TimerTask() {
 		@Override
 		public void run() {
-			getRestzeit().setValue((int)( System.currentTimeMillis()-timeStart)/1000);
+			getRestzeit().setValue(TIMEOUT - (int)(System.currentTimeMillis()-timeStart)/1000);
 			Platform.runLater(updateRestzeitLabel); // 
 			if (getRestzeit().intValue()<=0) {
 				timer.cancel();
