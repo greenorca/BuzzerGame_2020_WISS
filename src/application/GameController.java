@@ -63,12 +63,8 @@ public class GameController extends Application {
 
 		gamecontroller = new GameController();
 
-		EinAuslesenFragen eaF = new EinAuslesenFragen("src/res/fragen.ser");		
-
-		List<Frage> alleFragen = eaF.einlesenFragen("src/res/fragenBuzzerGame_20180925.csv");
-		eaF.writeInFile(alleFragen);
-
-		gamecontroller.eingeleseneFragen = eaF.leseFragen("src/res/fragen.ser");
+		List<Frage> alleFragen = EinAuslesenFragen.einlesenFragen("/home/pi/Desktop/fragenBuzzerGame_20180925.csv");
+		gamecontroller.eingeleseneFragen = alleFragen;
 		System.out.println("Size eingelesene Fragen: " + gamecontroller.eingeleseneFragen.size());
 		
 

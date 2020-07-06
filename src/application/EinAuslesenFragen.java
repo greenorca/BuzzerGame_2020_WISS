@@ -25,7 +25,7 @@ public class EinAuslesenFragen {
 		this.file = file;
 	}
 
-	public List<Frage> einlesenFragen(String fileCSV) {
+	public static List<Frage> einlesenFragen(String fileCSV) {
 
 		List<Frage> fragen = new ArrayList<Frage>();
 
