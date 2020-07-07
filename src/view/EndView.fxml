@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 
 <BorderPane id="pane" prefHeight="617.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EndViewController">
    <top>
@@ -34,12 +33,15 @@
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Rectangle fx:id="rectPlatz2" arcHeight="5.0" arcWidth="5.0" fill="#fcff1f" height="150.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                        <Label text="Platz 2">
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                        </Label>
+                        <AnchorPane fx:id="rectPlatz2" prefHeight="130.0">
+                           <children>
+                              <Label alignment="CENTER" layoutX="98.0" layoutY="73.0" text="Platz 2" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -54,12 +56,15 @@
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Rectangle fx:id="rectPlatz1" arcHeight="5.0" arcWidth="5.0" fill="#1fffa5" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                        <Label text="Platz 1">
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                        </Label>
+                        <AnchorPane fx:id="rectPlatz1" prefHeight="200.0">
+                           <children>
+                              <Label alignment="CENTER" text="Platz 1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -74,12 +79,15 @@
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Rectangle fx:id="rectPlatz3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
-                        <Label text="Platz 3">
-                           <padding>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </padding>
-                        </Label>
+                        <AnchorPane fx:id="rectPlatz3" prefHeight="120.0">
+                           <children>
+                              <Label alignment="CENTER" text="Platz 3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </AnchorPane>
                      </children>
                   </VBox>
                </children>
