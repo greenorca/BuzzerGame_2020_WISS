@@ -66,12 +66,11 @@ public class GameController extends Application {
 	private void readPreferences(){
 		System.out.println("Prefs-File: "+Preferences.userRoot().node(this.getClass().getName()));
 		prefs = Preferences.userRoot().node(this.getClass().getName());
-		MAX_FRAGEN = prefs.getInt("anzahl_fragen", 1);
+		MAX_FRAGEN = Integer.parseInt(prefs.get("anzahl_fragen", "1"));
 		fullScreen = prefs.getBoolean("full_screen", true);
-		MAX_ZEIT = prefs.getInt("time_out", 10);	
+		MAX_ZEIT = Integer.parseInt(prefs.get("time_out", "10");	
 		shuffleQuestions = prefs.getBoolean("shuffle_questions", true);	
-		
-		//storePreferences();
+		questionFile = prefs.get("questions_file", "/home/pi/Desktop/fragenBuzzerGame_290620.csv");
 	}
 	
 	private void storePreferences(){
@@ -89,7 +88,7 @@ public class GameController extends Application {
 		
 		style = getClass().getResource("buzzerStyle.css").toExternalForm();
 		
-		eingeleseneFragen = EinAuslesenFragen.einlesenFragen("/home/pi/Desktop/fragenBuzzerGame_290620.csv");
+		eingeleseneFragen = EinAuslesenFragen.einlesenFragen(questionFile);
 		screenWidth = 1200;
 		screenHeight = 800;
 		try {
@@ -354,6 +353,7 @@ public class GameController extends Application {
 			Platform.runLater(() -> scoreNotifyDone());
 		}
 	};
+	private String questionFile;
 
 	
 	public Set<Spieler> getSpielerliste() {

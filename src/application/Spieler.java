@@ -25,7 +25,9 @@ public class Spieler {
 		this.punktestand = new SimpleIntegerProperty();
 		this.antwortNr = new SimpleIntegerProperty(0);
 		this.setBuzzer(buzzer);
-		this.antwortNr.bind(getBuzzer().getAnswer());
+		if (buzzer != null) {
+			this.antwortNr.bind(getBuzzer().getAnswer());
+		}
 	}
 
 	//Spieler muss mitbekommen, dass Buzzer gedrückt
