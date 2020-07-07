@@ -45,6 +45,8 @@ public class GameController extends Application {
 	int MAX_ZEIT = 10;
 	private Frage aktuelleFrage;
 
+	boolean fullScreen = false;
+
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -52,13 +54,15 @@ public class GameController extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		eingeleseneFragen = EinAuslesenFragen.einlesenFragen("/home/pi/Desktop/fragenBuzzerGame_290620.csv");
-		screenWidth = primaryStage.getMaxWidth();
-		screenHeight = primaryStage.getMaxHeight();
+		screenWidth = 1200;
+		screenHeight = 800;
 		try {
 			myStage = primaryStage;
 			myStage.setTitle("Buzzer Game");
-			myStage.setFullScreenExitHint("");
-			myStage.setFullScreen(true);
+			if (fullScreen) {
+				myStage.setFullScreenExitHint("");
+				myStage.setFullScreen(true);
+			}
 			showStartupView();
 
 		} catch (Exception e) {
@@ -83,7 +87,7 @@ public class GameController extends Application {
 			startupController.setMainController(this);
 			
 			myStage.setScene(startupScene);
-			myStage.setFullScreen(true);
+			if (fullScreen) myStage.setFullScreen(true);
 			myStage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -146,7 +150,7 @@ public class GameController extends Application {
 			System.out.println("Spielrunde erstellt");
 			
 			myStage.setScene(lobbyScene);
-			myStage.setFullScreen(true);
+			if (fullScreen) myStage.setFullScreen(true);
 			myStage.show();	
 			
 								
@@ -210,7 +214,7 @@ public class GameController extends Application {
 			questionController.getRestzeit().addListener(showAnswerSceneListener);
 
 			myStage.setScene(questionScene);
-			myStage.setFullScreen(true);
+			if (fullScreen) myStage.setFullScreen(true);
 			myStage.show();
 
 		} catch(Exception e) {
@@ -231,7 +235,7 @@ public class GameController extends Application {
 			scoreController.getRestzeit().addListener(showNextQuestionListener);
 
 			myStage.setScene(scoreScene);
-			myStage.setFullScreen(true);
+			if (fullScreen) myStage.setFullScreen(true);
 			myStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -252,7 +256,7 @@ public class GameController extends Application {
 
 			
 			myStage.setScene(endScene);
-			myStage.setFullScreen(true);
+			if (fullScreen) myStage.setFullScreen(true);
 			myStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -262,10 +266,9 @@ public class GameController extends Application {
 
 
 	public void lobbyNotifyDone() {
-		rundenCounter++;
+		rundenCounter = 0;
 		aktuelleFrage = spielrunde.naechsteFrage();
 		showQuestionView(aktuelleFrage);
-
 	}
 
 	//von Score zu nächste Frage oder Ende
