@@ -23,6 +23,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.prefs.Preferences;
+
 import view.FXBuzzerController;
 import view.EndViewController;
 import view.LobbyViewController;
@@ -32,27 +37,50 @@ import view.StartupViewController;
 
 public class GameController extends Application {
 
-	Stage myStage = null;
+	private Stage myStage = null;
 	private double screenHeight, screenWidth;
 
 	private StartupViewController startupController;
 	private int rundenCounter;
 	private List<Frage> eingeleseneFragen;
 
-	Spielrunde spielrunde;
-	Set<Spieler> alleSpieler = new HashSet<Spieler>();
+	private Spielrunde spielrunde;
+	private Set<Spieler> alleSpieler = new HashSet<Spieler>();
 	private RaspiBuzzer buzzer1, buzzer2, buzzer3;
-	int MAX_ZEIT = 10;
+	
+	private int MAX_ZEIT = 10;
+	private int MAX_FRAGEN = 5;
 	private Frage aktuelleFrage;
+	private boolean shuffleQuestions = true;
+	private boolean fullScreen = true;
 
-	boolean fullScreen = false;
+	private Preferences prefs;
 
 	public static void main(String[] args) {
 		launch(args);
 	}
+	
+	private void readPreferences(){
+		System.out.println("Prefs-File: "+Preferences.userRoot().node(this.getClass().getName()));
+		prefs = Preferences.userRoot().node(this.getClass().getName());
+		MAX_FRAGEN = prefs.getInt("anzahl_fragen", 3);
+		fullScreen = prefs.getBoolean("full_screen", true);
+		MAX_ZEIT = prefs.getInt("time_out", 10);	
+		shuffleQuestions = prefs.getBoolean("shuffle_questions", true);	
+	}
+	
+	private void storePreferences(){
+		prefs = Preferences.userRoot().node(this.getClass().getName());
+		prefs.putInt("anzahl_fragen", MAX_FRAGEN);
+		prefs.putBoolean("full_screen", fullScreen);
+		prefs.putInt("time_out", MAX_ZEIT);
+	}
+	
+	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		readPreferences();
 		eingeleseneFragen = EinAuslesenFragen.einlesenFragen("/home/pi/Desktop/fragenBuzzerGame_290620.csv");
 		screenWidth = 1200;
 		screenHeight = 800;
@@ -144,9 +172,11 @@ public class GameController extends Application {
 				}			
 			});
 			
-			Collections.shuffle(eingeleseneFragen);
+			if (shuffleQuestions)
+				Collections.shuffle(eingeleseneFragen);
+			
 			System.out.println("Size eingelesene Fragen: " + eingeleseneFragen.size());
-			spielrunde = new Spielrunde(eingeleseneFragen.subList(0, 10));
+			spielrunde = new Spielrunde(eingeleseneFragen.subList(0, MAX_FRAGEN));
 			System.out.println("Spielrunde erstellt");
 			
 			myStage.setScene(lobbyScene);
@@ -158,10 +188,6 @@ public class GameController extends Application {
 			e.printStackTrace();
 			Platform.exit();
 		}
-		
-		
-
-		
 		
 	}
 
@@ -266,17 +292,27 @@ public class GameController extends Application {
 
 
 	public void lobbyNotifyDone() {
-		rundenCounter = 0;
-		aktuelleFrage = spielrunde.naechsteFrage();
-		showQuestionView(aktuelleFrage);
+		if(getSpielerliste().size() > 1){
+			rundenCounter = 0;
+			aktuelleFrage = spielrunde.naechsteFrage();
+			showQuestionView(aktuelleFrage);
+		}
+		else {
+			Alert al = new Alert(Alert.AlertType.WARNING, "Es sind mindestens zwei Spieler benötigt",ButtonType.OK);
+			al.showAndWait();
+		}
 	}
 
 	//von Score zu nächste Frage oder Ende
 	public void scoreNotifyDone() {
 		System.out.println("'Gamecontroller: ' Runden gespielt: " + rundenCounter);
 		rundenCounter++;
-		aktuelleFrage = spielrunde.naechsteFrage();
-		showQuestionView(aktuelleFrage);
+		if (rundenCounter < MAX_FRAGEN){
+			aktuelleFrage = spielrunde.naechsteFrage();
+			showQuestionView(aktuelleFrage);
+		} else {
+			Platform.runLater(() -> showEndScene());
+		}
 
 	}
 

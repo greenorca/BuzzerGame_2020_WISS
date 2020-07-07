@@ -27,7 +27,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
-public class AnswerViewController implements Initializable{
+public class AnswerViewController{
 
 	@FXML
 	Label lblS1Name;
@@ -69,29 +69,6 @@ public class AnswerViewController implements Initializable{
 		if (restzeit == null) 
 			restzeit = new SimpleIntegerProperty(TIMEOUT);
 		return restzeit;
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		getRestzeit().setValue(TIMEOUT);
-		tStart = new Date().getTime(); //setze Startzeit
-		timer = new Timer();
-		timer.scheduleAtFixedRate(tTask, 100, 1000);
-
-		lblAntwort.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-		    //final KeyCombination keyCombinationSave = new KeyCodeCombination(KeyCode.S,
-		    //                                                      KeyCodeCombination.CONTROL_DOWN);
-		    
-		    
-			public void handle(KeyEvent ke) {
-		        if (ke.getCode() == KeyCode.SPACE) {
-		            System.out.println("Key Pressed: " + ke.getCode());
-		            restzeit.setValue(0);
-		            ke.consume(); // <-- stops passing the event to next node
-		        }
-		    }
-		});
-		
 	}
 
 	TimerTask tTask = new TimerTask() {
@@ -146,6 +123,26 @@ public class AnswerViewController implements Initializable{
 			lblS3PunkteGesamt.setText(spielerliste.get(2).getPunktestand().getValue().toString());
 			lblS3PunkteDazu.setText(String.valueOf(spielerliste.get(2).getRundenpunkte()));
 		}
+		
+		lblAntwort.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+		    //final KeyCombination keyCombinationSave = new KeyCodeCombination(KeyCode.S,
+		    //                                                      KeyCodeCombination.CONTROL_DOWN);
+		    
+		    
+			public void handle(KeyEvent ke) {
+		        if (ke.getCode() == KeyCode.SPACE) {
+		            System.out.println("Key Pressed: " + ke.getCode());
+		            restzeit.setValue(0);
+		            ke.consume(); // <-- stops passing the event to next node
+		        }
+		    }
+		});
+		
+		getRestzeit().setValue(TIMEOUT);
+		tStart = new Date().getTime(); //setze Startzeit
+		timer = new Timer();
+		timer.scheduleAtFixedRate(tTask, 100, 1000);
+	
 
 	}
 

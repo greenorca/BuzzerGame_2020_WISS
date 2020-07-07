@@ -72,10 +72,6 @@ public class LobbyViewController {
 				lbl.setText("Ready");
 				lbl.setStyle("-fx-border-color: #c10a27");
 				lbl.setStyle("-fx-text-fill: black");
-				
-				if(gameController.getSpielerliste().size() > 1) {
-					gameController.lobbyNotifyDone();		
-				}
 			}
 		});
 	}
