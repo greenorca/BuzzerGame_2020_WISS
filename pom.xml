@@ -75,7 +75,7 @@
                 <archive>
                 <manifest>
                     <mainClass>
-                        application.Main
+                        application.GameController
                     </mainClass>
                 </manifest>
                 </archive>

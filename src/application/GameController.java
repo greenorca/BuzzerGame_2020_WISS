@@ -66,7 +66,7 @@ public class GameController extends Application {
 	private void readPreferences(){
 		System.out.println("Prefs-File: "+Preferences.userRoot().node(this.getClass().getName()));
 		prefs = Preferences.userRoot().node(this.getClass().getName());
-		MAX_FRAGEN = prefs.getInt("anzahl_fragen", 3);
+		MAX_FRAGEN = prefs.getInt("anzahl_fragen", 1);
 		fullScreen = prefs.getBoolean("full_screen", true);
 		MAX_ZEIT = prefs.getInt("time_out", 10);	
 		shuffleQuestions = prefs.getBoolean("shuffle_questions", true);	
@@ -109,15 +109,16 @@ public class GameController extends Application {
 
 			@Override
 			public void handle(WindowEvent event) {
-				// TODO Auto-generated method stub
+				System.out.println("App shutdown");
 				Platform.exit();
+				System.exit(0);
 			}
 			
 		});
 	}
 
 	public void showStartupView() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/StartupView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StartupView.fxml"));
 		
 		buzzer1 = new RaspiBuzzer(RaspiPin.GPIO_27, RaspiPin.GPIO_28, RaspiPin.GPIO_29);
 		buzzer2 = new RaspiBuzzer(RaspiPin.GPIO_00, RaspiPin.GPIO_02, RaspiPin.GPIO_03);
@@ -142,7 +143,7 @@ public class GameController extends Application {
 
 	public void showLobbyView() {
 		alleSpieler.clear();
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/LobbyView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/LobbyView.fxml"));
 		try {
 			Scene lobbyScene = new Scene(loader.load(), screenWidth, screenHeight);
 			
@@ -245,7 +246,7 @@ public class GameController extends Application {
 	}
 
 	public void showQuestionView(Frage question) {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/QuestionView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/QuestionView.fxml"));
 		try {
 
 			Scene questionScene = new Scene(loader.load(), screenWidth, screenHeight);
@@ -268,7 +269,7 @@ public class GameController extends Application {
 
 	//XD added showScoreScene()
 	public void showAnswerScene() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AnswerView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/AnswerView.fxml"));
 		try {
 			Scene answerScene = new Scene(loader.load(), screenWidth, screenHeight);
 			answerScene.getStylesheets().add(style);
@@ -286,7 +287,7 @@ public class GameController extends Application {
 	}
 
 	public void showEndScene() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EndView.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EndView.fxml"));
 		try {
 			Scene endScene = new Scene(loader.load(), screenWidth, screenHeight);
 			endScene.getStylesheets().add(style);

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane id="pane" prefHeight="617.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EndViewController">
+<BorderPane id="wiss_pane" prefHeight="617.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EndViewController">
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
@@ -17,23 +17,23 @@
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane BorderPane.alignment="CENTER">
+      <AnchorPane id="endergebnis" BorderPane.alignment="CENTER">
          <children>
             <HBox layoutX="412.0" layoutY="106.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
                <children>
                   <VBox alignment="BOTTOM_CENTER" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label id="lblEndstand" fx:id="lblS1Name" text="lblS1Name">
+                        <Label fx:id="lblS2Name" text="lblS2Name">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label id="lblEndstand" fx:id="lblS1PunkteGesamt" text="300">
+                        <Label fx:id="lblS2PunkteGesamt" text="300">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
                         </Label>
-                        <AnchorPane fx:id="rectPlatz2" prefHeight="130.0">
+                        <AnchorPane fx:id="rectPlatz2" prefHeight="150.0"  minHeight="150.0">
                            <children>
                               <Label alignment="CENTER" layoutX="98.0" layoutY="73.0" text="Platz 2" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                  <padding>
@@ -46,17 +46,17 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label id="lblEndstand" fx:id="lblS2Name" text="lblS2Name">
+                        <Label fx:id="lblS1Name" text="lblS1Name">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label id="lblEndstand" fx:id="lblS2PunkteGesamt" text="200">
+                        <Label fx:id="lblS1PunkteGesamt" text="200">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
                         </Label>
-                        <AnchorPane fx:id="rectPlatz1" prefHeight="200.0">
+                        <AnchorPane fx:id="rectPlatz1" prefHeight="200.0"  minHeight="200.0">
                            <children>
                               <Label alignment="CENTER" text="Platz 1" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                  <padding>
@@ -69,17 +69,17 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label id="lblEndstand" fx:id="lblS3Name" text="lblS3Name">
+                        <Label fx:id="lblS3Name" text="lblS3Name">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label id="lblEndstand" fx:id="lblS3PunkteGesamt" text="100">
+                        <Label fx:id="lblS3PunkteGesamt" text="100">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
                         </Label>
-                        <AnchorPane fx:id="rectPlatz3" prefHeight="120.0">
+                        <AnchorPane fx:id="rectPlatz3" prefHeight="100.0" minHeight="100.0">
                            <children>
                               <Label alignment="CENTER" text="Platz 3" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                  <padding>
