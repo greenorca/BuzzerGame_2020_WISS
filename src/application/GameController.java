@@ -19,10 +19,12 @@ import javafx.application.Platform;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -103,7 +105,15 @@ public class GameController extends Application {
 			e.printStackTrace();
 			Platform.exit();
 		}
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
+			@Override
+			public void handle(WindowEvent event) {
+				// TODO Auto-generated method stub
+				Platform.exit();
+			}
+			
+		});
 	}
 
 	public void showStartupView() {
