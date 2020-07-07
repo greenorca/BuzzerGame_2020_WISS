@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 
 <BorderPane id="pane" prefHeight="617.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.EndViewController">
    <top>
@@ -19,108 +20,75 @@
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <VBox layoutX="62.0" AnchorPane.leftAnchor="50.0">
+            <HBox layoutX="412.0" layoutY="106.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <HBox id="hBoxEndstand">
+                  <VBox alignment="BOTTOM_CENTER" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label id="lblEndstand" text="1.">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </HBox.margin>
-                           <padding>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </padding>
-                        </Label>
                         <Label id="lblEndstand" fx:id="lblS1Name" text="lblS1Name">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </HBox.margin>
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
                         </Label>
-                        <Label id="lblEndstand" fx:id="lblS1PunkteGesamt" text="Label">
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </HBox.margin>
+                        <Label id="lblEndstand" fx:id="lblS1PunkteGesamt" text="300">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                           </padding>
+                        </Label>
+                        <Rectangle fx:id="rectPlatz2" arcHeight="5.0" arcWidth="5.0" fill="#fcff1f" height="150.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                        <Label text="Platz 2">
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>
                         </Label>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="15.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox id="hBoxEndstand">
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label id="lblEndstand" text="2.">
-                           <padding>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </padding>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </HBox.margin>
-                        </Label>
                         <Label id="lblEndstand" fx:id="lblS2Name" text="lblS2Name">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </HBox.margin>
                         </Label>
-                        <Label id="lblEndstand" fx:id="lblS2PunkteGesamt" text="Label">
+                        <Label id="lblEndstand" fx:id="lblS2PunkteGesamt" text="200">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </HBox.margin>
+                        </Label>
+                        <Rectangle fx:id="rectPlatz1" arcHeight="5.0" arcWidth="5.0" fill="#1fffa5" height="200.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                        <Label text="Platz 1">
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding>
                         </Label>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="15.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox id="hBoxEndstand" fx:id="hBoxEndstand">
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label id="lblEndstand" fx:id="lblPlatz3" text="3.">
+                        <Label id="lblEndstand" fx:id="lblS3Name" text="lblS3Name">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </HBox.margin>
                         </Label>
-                        <Label id="lblEndstand" fx:id="lblS3Name">
+                        <Label id="lblEndstand" fx:id="lblS3PunkteGesamt" text="100">
                            <padding>
                               <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
                            </padding>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </HBox.margin>
                         </Label>
-                        <Label id="lblEndstand" fx:id="lblS3PunkteGesamt">
+                        <Rectangle fx:id="rectPlatz3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="100.0" stroke="BLACK" strokeType="INSIDE" width="200.0" />
+                        <Label text="Platz 3">
                            <padding>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </padding>
-                           <HBox.margin>
-                              <Insets bottom="5.0" left="15.0" right="15.0" top="5.0" />
-                           </HBox.margin>
                         </Label>
                      </children>
-                     <VBox.margin>
-                        <Insets bottom="15.0" />
-                     </VBox.margin>
-                  </HBox>
+                  </VBox>
                </children>
-            </VBox>
+            </HBox>
          </children>
       </AnchorPane>
    </center>
    <bottom>
-      <Button fx:id="btnEndGame" mnemonicParsing="false" onAction="#endGameRound" text="Fertig" BorderPane.alignment="CENTER">
+      <Button fx:id="btnEndGame" mnemonicParsing="false" onAction="#endGameRound" text="Neues Spiel" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="50.0" />
          </BorderPane.margin>
