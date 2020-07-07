@@ -55,7 +55,8 @@ public class GameController extends Application {
 	private boolean fullScreen = true;
 
 	private Preferences prefs;
-
+	private String style;
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -67,6 +68,8 @@ public class GameController extends Application {
 		fullScreen = prefs.getBoolean("full_screen", true);
 		MAX_ZEIT = prefs.getInt("time_out", 10);	
 		shuffleQuestions = prefs.getBoolean("shuffle_questions", true);	
+		
+		storePreferences();
 	}
 	
 	private void storePreferences(){
@@ -81,6 +84,9 @@ public class GameController extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		readPreferences();
+		
+		style = getClass().getResource("buzzerStyle.css").toExternalForm();
+		
 		eingeleseneFragen = EinAuslesenFragen.einlesenFragen("/home/pi/Desktop/fragenBuzzerGame_290620.csv");
 		screenWidth = 1200;
 		screenHeight = 800;
@@ -110,7 +116,7 @@ public class GameController extends Application {
 		
 		try {
 			Scene startupScene = new Scene(loader.load(), screenWidth, screenHeight);
-			startupScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
+			startupScene.getStylesheets().add(style);
 			startupController = loader.getController();
 			startupController.setMainController(this);
 			
@@ -130,7 +136,7 @@ public class GameController extends Application {
 		try {
 			Scene lobbyScene = new Scene(loader.load(), screenWidth, screenHeight);
 			
-			lobbyScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
+			lobbyScene.getStylesheets().add(style);
 			LobbyViewController lobbyController = loader.getController();
 			lobbyController.setMainController(this);
 			
@@ -255,7 +261,7 @@ public class GameController extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AnswerView.fxml"));
 		try {
 			Scene answerScene = new Scene(loader.load(), screenWidth, screenHeight);
-			answerScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
+			answerScene.getStylesheets().add(style);
 			AnswerViewController scoreController = loader.getController();
 			scoreController.setInformation(aktuelleFrage, alleSpieler);
 			scoreController.getRestzeit().addListener(showNextQuestionListener);
@@ -273,7 +279,7 @@ public class GameController extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/EndView.fxml"));
 		try {
 			Scene endScene = new Scene(loader.load(), screenWidth, screenHeight);
-			endScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
+			endScene.getStylesheets().add(style);
 
 			EndViewController endController = loader.getController();
 			endController.setMainController(this);
