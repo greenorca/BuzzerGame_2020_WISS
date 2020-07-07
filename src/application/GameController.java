@@ -35,6 +35,7 @@ import view.EndViewController;
 import view.LobbyViewController;
 import view.QuestionViewController;
 import view.AnswerViewController;
+import view.EditSettingsViewController;
 import view.StartupViewController;
 
 public class GameController extends Application {
@@ -358,6 +359,26 @@ public class GameController extends Application {
 	
 	public Set<Spieler> getSpielerliste() {
 		return alleSpieler;
+	}
+
+	public void editSettings() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EditSettingsView.fxml"));
+			
+			Scene scene = new Scene(loader.load());
+			EditSettingsViewController controller = loader.getController();
+			
+			Preferences prefs = Preferences.userRoot().node(this.getClass().getName()); 
+			
+			controller.setPreferences(prefs);
+			
+			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+			myStage.setScene(scene);
+			myStage.show();
+		} catch(Exception e) {
+			e.printStackTrace();
+			Platform.exit();
+		}
 	}
 
 

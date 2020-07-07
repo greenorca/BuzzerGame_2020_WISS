@@ -23,7 +23,7 @@
          <children>
             <HBox layoutY="10.0" prefHeight="190.0" prefWidth="1920.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Open Admin Scene" HBox.hgrow="ALWAYS">
+                  <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnSettingsPressed" text="Einstellungen bearbeiten" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="50.0" left="15.0" right="20.0" top="5.0" />
                      </HBox.margin>
