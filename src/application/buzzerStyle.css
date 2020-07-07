@@ -4,7 +4,7 @@
 
 
 #wiss_pane{
-    -fx-background-image: url("../../../resources/LogoWISS.jpg");
+    -fx-background-image: url("../res/LogoWISS.jpg");
     -fx-background-repeat: stretch;   
     -fx-background-size: 300 138;
     -fx-background-position: top right;
