@@ -27,7 +27,7 @@ import view.FXBuzzerController;
 import view.EndViewController;
 import view.LobbyViewController;
 import view.QuestionViewController;
-import view.ScoreViewController;
+import view.AnswerViewController;
 import view.StartupViewController;
 
 public class GameController extends Application {
@@ -226,15 +226,15 @@ public class GameController extends Application {
 
 	//XD added showScoreScene()
 	public void showAnswerScene() {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/ScoreView2.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/AnswerView.fxml"));
 		try {
-			Scene scoreScene = new Scene(loader.load(), screenWidth, screenHeight);
-			scoreScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
-			ScoreViewController scoreController = loader.getController();
+			Scene answerScene = new Scene(loader.load(), screenWidth, screenHeight);
+			answerScene.getStylesheets().add(getClass().getResource("buzzerStyle.css").toExternalForm());
+			AnswerViewController scoreController = loader.getController();
 			scoreController.setInformation(aktuelleFrage, alleSpieler);
 			scoreController.getRestzeit().addListener(showNextQuestionListener);
 
-			myStage.setScene(scoreScene);
+			myStage.setScene(answerScene);
 			if (fullScreen) myStage.setFullScreen(true);
 			myStage.show();
 		} catch (Exception e) {

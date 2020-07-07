@@ -60,7 +60,7 @@
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Label>
-            <ImageView fitHeight="171.0" fitWidth="400.0" layoutX="1552.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="120.0" AnchorPane.topAnchor="-25.0">
+            <ImageView fitHeight="137.0" fitWidth="288.0" layoutX="1552.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../resources/LogoWISS.jpg" />
                </image>

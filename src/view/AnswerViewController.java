@@ -17,12 +17,17 @@ import application.GameController;
 import application.Spieler;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 
-public class ScoreViewController implements Initializable{
+public class AnswerViewController implements Initializable{
 
 	@FXML
 	Label lblS1Name;
@@ -73,6 +78,20 @@ public class ScoreViewController implements Initializable{
 		timer = new Timer();
 		timer.scheduleAtFixedRate(tTask, 100, 1000);
 
+		lblAntwort.getScene().addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+		    //final KeyCombination keyCombinationSave = new KeyCodeCombination(KeyCode.S,
+		    //                                                      KeyCodeCombination.CONTROL_DOWN);
+		    
+		    
+			public void handle(KeyEvent ke) {
+		        if (ke.getCode() == KeyCode.SPACE) {
+		            System.out.println("Key Pressed: " + ke.getCode());
+		            restzeit.setValue(0);
+		            ke.consume(); // <-- stops passing the event to next node
+		        }
+		    }
+		});
+		
 	}
 
 	TimerTask tTask = new TimerTask() {
