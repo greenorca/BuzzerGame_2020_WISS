@@ -23,8 +23,7 @@ public class LobbyViewController {
 	Button btnSpieler1, btnSpieler2, btnSpieler3;
 	
 	GameController gameController;
-	public GameController setMainController;
-
+	
 	public void setMainController(GameController gameController) {
 		this.gameController = gameController;
 	}

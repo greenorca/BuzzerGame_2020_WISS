@@ -48,11 +48,11 @@ public class GameController extends Application {
 	private Set<Spieler> alleSpieler = new HashSet<Spieler>();
 	private RaspiBuzzer buzzer1, buzzer2, buzzer3;
 	
-	private int MAX_ZEIT = 10;
-	private int MAX_FRAGEN = 5;
+	private int MAX_ZEIT;
+	private int MAX_FRAGEN;
 	private Frage aktuelleFrage;
-	private boolean shuffleQuestions = true;
-	private boolean fullScreen = true;
+	private boolean shuffleQuestions;
+	private boolean fullScreen;
 
 	private Preferences prefs;
 	private String style;
@@ -69,11 +69,11 @@ public class GameController extends Application {
 		MAX_ZEIT = prefs.getInt("time_out", 10);	
 		shuffleQuestions = prefs.getBoolean("shuffle_questions", true);	
 		
-		storePreferences();
+		//storePreferences();
 	}
 	
 	private void storePreferences(){
-		prefs = Preferences.userRoot().node(this.getClass().getName());
+		//prefs = Preferences.userRoot().node(this.getClass().getName());
 		prefs.putInt("anzahl_fragen", MAX_FRAGEN);
 		prefs.putBoolean("full_screen", fullScreen);
 		prefs.putInt("time_out", MAX_ZEIT);

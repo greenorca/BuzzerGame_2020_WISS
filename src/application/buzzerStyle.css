@@ -4,11 +4,11 @@
 
 
 #pane{
-    -fx-background-image: url("../../../resources/LogoWISS.jpg");
+    /*-fx-background-image: url("../../../resources/LogoWISS.jpg");
     -fx-background-repeat: stretch;   
-    -fx-background-size: 300 140;
+    -fx-background-size: 300 138;
     -fx-background-position: top right;
-    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); 
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0); */
 }
 
 .button{
@@ -39,7 +39,7 @@
 .zwischenstand .label{
 	-fx-padding: 10pt;
 	-fx-font-weight: bold;
-	-fx-font-size: 20pt;
+	-fx-font-size: 30pt;
 }
 
 
