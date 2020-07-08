@@ -80,7 +80,7 @@ public class QuestionViewController implements Initializable {
 					
 					if((int)neu == frage.korrekteAntwortInt()) {
 						long pressedTime = System.currentTimeMillis();
-						int punkte = (maxZeit*1000 - (int)(pressedTime - timeStart))/100;
+						int punkte = Math.max(0, (maxZeit*1000 - (int)(pressedTime - timeStart))/100);
 
 						spieler.addPunkte(punkte);
 						spieler.setRundenpunkte(punkte);
