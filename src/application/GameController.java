@@ -376,6 +376,7 @@ public class GameController extends Application {
 			Stage ediStage = new Stage();
 			ediStage.setScene(scene);
 			ediStage.showAndWait();
+			ediStage.setTitle("Einstellungen und Hardwaretest");
 			readPreferences();
 		} catch(Exception e) {
 			e.printStackTrace();
