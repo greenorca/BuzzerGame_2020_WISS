@@ -23,6 +23,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.scene.control.Alert;
@@ -316,6 +317,8 @@ public class GameController extends Application {
 		}
 		else {
 			Alert al = new Alert(Alert.AlertType.WARNING, "Es sind mindestens zwei Spieler benötigt",ButtonType.OK);
+			al.initModality(Modality.APPLICATION_MODAL);
+	        al.initOwner(myStage);
 			al.showAndWait();
 		}
 	}
