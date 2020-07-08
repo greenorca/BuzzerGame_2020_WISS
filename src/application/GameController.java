@@ -370,6 +370,7 @@ public class GameController extends Application {
 			Preferences prefs = Preferences.userRoot().node(this.getClass().getName()); 
 			
 			controller.setPreferences(prefs);
+			controller.setBuzzers(buzzer1, buzzer2, buzzer3);
 			
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			Stage ediStage = new Stage();

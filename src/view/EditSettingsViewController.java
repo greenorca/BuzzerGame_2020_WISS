@@ -13,11 +13,13 @@ import javafx.stage.Window;
 import java.io.File;
 import java.net.URL;
 import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.prefs.Preferences;
 
 import com.sun.glass.ui.Application;
 
+import application.RaspiBuzzer;
 import javafx.event.ActionEvent;
 
 import javafx.scene.control.ComboBox;
@@ -36,6 +38,17 @@ public class EditSettingsViewController implements Initializable {
 	@FXML RadioButton  toggleRandomQuestionTrue;
 	@FXML RadioButton  toggleRandomQuestionFalse;
 
+	@FXML RadioButton gpio1A;
+	@FXML RadioButton gpio1B;
+	@FXML RadioButton gpio1C;
+	@FXML RadioButton gpio2A;
+	@FXML RadioButton gpio2B;
+	@FXML RadioButton gpio2C;
+	@FXML RadioButton gpio3A;
+	@FXML RadioButton gpio3B;
+	@FXML RadioButton gpio3C;
+
+	
 	private Preferences prefs;
 
 	// Event Listener on Button.onAction
@@ -67,6 +80,28 @@ public class EditSettingsViewController implements Initializable {
 			toggleRandomQuestionFalse.setSelected(true);
 		}
 	}
+	
+	public void setBuzzers(RaspiBuzzer buzzer1, RaspiBuzzer buzzer2, RaspiBuzzer buzzer3) {
+		if (buzzer1 != null) {
+			gpio1A.selectedProperty().bind(buzzer1.btnAState);
+			gpio1B.selectedProperty().bind(buzzer1.btnBState);
+			gpio1C.selectedProperty().bind(buzzer1.btnCState);
+			
+		} 
+		if (buzzer2 != null) {
+			gpio2A.selectedProperty().bind(buzzer2.btnAState);
+			gpio2B.selectedProperty().bind(buzzer2.btnBState);
+			gpio2C.selectedProperty().bind(buzzer2.btnCState);
+			
+		} 
+		if (buzzer3 != null) {
+			gpio3A.selectedProperty().bind(buzzer3.btnAState);
+			gpio3B.selectedProperty().bind(buzzer3.btnBState);
+			gpio3C.selectedProperty().bind(buzzer3.btnCState);
+			
+		} 
+		
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -82,14 +117,17 @@ public class EditSettingsViewController implements Initializable {
 		prefs.put("time_out", comboZeitFrage.getSelectionModel().getSelectedItem());
 		prefs.putBoolean("shuffle_questions", toggleRandomQuestionTrue.isSelected());
 		System.out.println("saving stuff");
-		Stage w = (Stage)txtQuestionFile.getScene().getWindow();
-		w.close();
+		closeWindow();
 	}
 	
 	@FXML public void cancel() {
 		System.out.println("NOT saving stuff");
+		closeWindow();
+	}
+	
+	private void closeWindow() {
 		Stage w = (Stage)txtQuestionFile.getScene().getWindow();
-		w.close();		
+		w.close();
 	}
 	
 }

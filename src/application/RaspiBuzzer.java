@@ -27,9 +27,9 @@ public class RaspiBuzzer implements IBuzzer {
 	
 		GpioController gpio;
         GpioPinDigitalInput btnA, btnB, btnC;
-        BooleanProperty btnAState;
-        BooleanProperty btnBState;
-        BooleanProperty btnCState;
+        public BooleanProperty btnAState;
+        public BooleanProperty btnBState;
+        public BooleanProperty btnCState;
         
         public RaspiBuzzer(Pin p1, Pin p2, Pin p3){
 	
