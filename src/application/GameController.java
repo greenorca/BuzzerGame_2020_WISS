@@ -122,7 +122,7 @@ public class GameController extends Application {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/StartupView.fxml"));
 		
 		buzzer1 = new RaspiBuzzer(RaspiPin.GPIO_27, RaspiPin.GPIO_28, RaspiPin.GPIO_29);
-		buzzer2 = new RaspiBuzzer(RaspiPin.GPIO_00, RaspiPin.GPIO_02, RaspiPin.GPIO_03);
+		buzzer2 = new RaspiBuzzer(RaspiPin.GPIO_03, RaspiPin.GPIO_02, RaspiPin.GPIO_00);
 		buzzer3 = new RaspiBuzzer(RaspiPin.GPIO_23, RaspiPin.GPIO_24, RaspiPin.GPIO_25);
 		
 		
