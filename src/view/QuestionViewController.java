@@ -41,7 +41,6 @@ public class QuestionViewController implements Initializable {
 	
 	private IntegerProperty restzeit;
 	private int btnClickCounter = 0;
-	private static int TIMEOUT = 10;
 	private Timer timer;
 	long timeStart;
 	int maxZeit;
@@ -50,7 +49,7 @@ public class QuestionViewController implements Initializable {
 	
 	public IntegerProperty getRestzeit() {
 		if (restzeit == null)
-			restzeit = new SimpleIntegerProperty(TIMEOUT);
+			restzeit = new SimpleIntegerProperty(maxZeit);
 		return restzeit;
 	}
 	
@@ -64,13 +63,11 @@ public class QuestionViewController implements Initializable {
 		setAnswers(frage.getAntworten());
 		this.maxZeit = maxZeit;
 		this.timeStart = System.currentTimeMillis();
-		initPlayers(spielerliste);
-		
-		
-		getRestzeit().setValue(TIMEOUT);		
+				
+		getRestzeit().setValue(maxZeit);		
 		timer = new Timer();
-		timer.scheduleAtFixedRate(tTask, 100, 1000); //aktiviere zyklische Wiederholung
-		
+		timer.scheduleAtFixedRate(tTask, 0, 1000); //aktiviere zyklische Wiederholung
+		initPlayers(spielerliste);
 	}
 	
 	private void initPlayers(Set<Spieler> spielerliste) {
@@ -127,7 +124,7 @@ public class QuestionViewController implements Initializable {
 	TimerTask tTask = new TimerTask() {
 		@Override
 		public void run() {
-			getRestzeit().setValue(TIMEOUT - (int)(System.currentTimeMillis()-timeStart)/1000);
+			getRestzeit().setValue(maxZeit - (int)(System.currentTimeMillis()-timeStart)/1000);
 			Platform.runLater(updateRestzeitLabel); // 
 			if (getRestzeit().intValue()<=0) {
 				timer.cancel();

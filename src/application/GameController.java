@@ -73,13 +73,9 @@ public class GameController extends Application {
 		MAX_ZEIT = Integer.parseInt(prefs.get("time_out", "10"));	
 		shuffleQuestions = prefs.getBoolean("shuffle_questions", true);	
 		questionFile = prefs.get("questions_file", "/home/pi/Desktop/fragenBuzzerGame_290620.csv");
-	}
-	
-	private void storePreferences(){
-		//prefs = Preferences.userRoot().node(this.getClass().getName());
-		prefs.putInt("anzahl_fragen", MAX_FRAGEN);
-		prefs.putBoolean("full_screen", fullScreen);
-		prefs.putInt("time_out", MAX_ZEIT);
+		
+		System.out.println("MAX_ZEIT: "+MAX_ZEIT);
+		System.out.println("MAX_FRAGEN: "+MAX_FRAGEN);
 	}
 	
 	
@@ -376,8 +372,10 @@ public class GameController extends Application {
 			controller.setPreferences(prefs);
 			
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			myStage.setScene(scene);
-			myStage.show();
+			Stage ediStage = new Stage();
+			ediStage.setScene(scene);
+			ediStage.showAndWait();
+			readPreferences();
 		} catch(Exception e) {
 			e.printStackTrace();
 			Platform.exit();
