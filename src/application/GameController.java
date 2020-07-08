@@ -70,7 +70,7 @@ public class GameController extends Application {
 		prefs = Preferences.userRoot().node(this.getClass().getName());
 		MAX_FRAGEN = Integer.parseInt(prefs.get("anzahl_fragen", "1"));
 		fullScreen = prefs.getBoolean("full_screen", true);
-		MAX_ZEIT = Integer.parseInt(prefs.get("time_out", "10");	
+		MAX_ZEIT = Integer.parseInt(prefs.get("time_out", "10"));	
 		shuffleQuestions = prefs.getBoolean("shuffle_questions", true);	
 		questionFile = prefs.get("questions_file", "/home/pi/Desktop/fragenBuzzerGame_290620.csv");
 	}
