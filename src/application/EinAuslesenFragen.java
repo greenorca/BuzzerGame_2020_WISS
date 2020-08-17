@@ -10,7 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
+import  java.nio.charset.*;
 
 /**
  * Kümmert sich um ein- und auslesen aller Fragen
@@ -27,7 +27,7 @@ public class EinAuslesenFragen {
 
 
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(fileCSV));
+			BufferedReader br = new BufferedReader(new FileReader(fileCSV, StandardCharsets.UTF_8));
 			while ((line = br.readLine()) != null) {
 				String[] bestandTeilLinie = line.split(splitBy);
 				if (bestandTeilLinie.length == 5){
