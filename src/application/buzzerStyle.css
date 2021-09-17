@@ -69,7 +69,7 @@
 }
 
 #hBoxZwischenstand, #hBoxEndstand {
-	-fx-border-color: #c10a27;
+	/*-fx-border-color: #c10a27;*/
 	-fx-border-width: 5pt;
 	-fx-border-radius: 10pt;
 	-fx-margin-top: 15pt;

@@ -25,7 +25,7 @@ public class RaspiBuzzer implements IBuzzer {
 	private IntegerProperty answer = new SimpleIntegerProperty();
 	
 	
-		GpioController gpio;
+	GpioController gpio;
         GpioPinDigitalInput btnA, btnB, btnC;
         public BooleanProperty btnAState;
         public BooleanProperty btnBState;
@@ -98,16 +98,16 @@ public class RaspiBuzzer implements IBuzzer {
                 }
             });
 	
-}
+	}
 
-@Override
+	@Override
 	public IntegerProperty getAnswer() {
 		if(answer == null) {
 			answer = new SimpleIntegerProperty();
 		}
 		return answer;
 	
-}
+	}
 
 }
 
