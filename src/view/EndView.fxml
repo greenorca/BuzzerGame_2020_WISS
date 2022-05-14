@@ -12,7 +12,7 @@
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" text="Herzlichen Glückwunsch!" AnchorPane.bottomAnchor="132.4" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="50.0" />
+            <Label alignment="CENTER" text="Herzlichen Glückwunsch!" AnchorPane.bottomAnchor="132.4" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0" />
          </children>
       </AnchorPane>
    </top>
